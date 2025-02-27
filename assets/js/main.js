@@ -24,12 +24,47 @@
 			isModified = false;
 		});
 
+		const addEventButton = document.getElementById('add-event');
+		if( addEventButton ) {
+			addEventButton.addEventListener('click', addEvent);
+		}
+
 	}	
 	document.addEventListener( 'DOMContentLoaded', init, false );
 
 
+	function addEvent(e) {
+		const table = document.getElementById('new-table');
+		if( ! table ) return;
+
+		e.preventDefault();
+
+		const template = document.getElementById('new-event-template').cloneNode(true);
+		template.removeAttribute('id');
+		template.removeAttribute('hidden');
+		template.querySelector('button').addEventListener('click', removeEvent);
+		template.querySelector('input').required = true;
+		template.querySelector('select').required = true;
+
+		table.insertBefore(template, table.querySelector('tfoot'));
+
+	}
+
+
+	function removeEvent(e){
+		e.preventDefault();
+
+		const tr = this.closest('tr');
+
+		tr.remove();
+	}
+
+
 	function updateLineCounts() {
 		const table = document.getElementById('schedule-list');
+
+		if( ! table ) return;
+
 		const trs = table.querySelectorAll('tr.event-line');
 
 		let people_count = parseInt(table.dataset.peopleCount, 10) + 1;
@@ -39,17 +74,21 @@
 			max_yes_maybe = 0;
 
 		for( const tr of trs ) {
+
+
 			let yes = parseInt(tr.dataset.yes, 10),
 				no = parseInt(tr.dataset.no, 10),
 				maybe = parseInt(tr.dataset.maybe, 10);
 
-			const val = parseInt(tr.querySelector('select').value, 10);
-			if( val === 0 ) {
-				no++;
-			} else if( val === 1 ) {
-				yes++;
-			} else if( val === 2 ) {
-				maybe++;
+			if( tr.querySelector('select') ) {
+				const val = parseInt(tr.querySelector('select').value, 10);
+				if( val === 0 ) {
+					no++;
+				} else if( val === 1 ) {
+					yes++;
+				} else if( val === 2 ) {
+					maybe++;
+				}
 			}
 
 			if( yes > max_yes ) max_yes = yes;
@@ -64,13 +103,17 @@
 				maybe = parseInt(tr.dataset.maybe, 10),
 				count = people_count;
 
-			const val = parseInt(tr.querySelector('select').value, 10);
-			if( val === 0 ) {
-				no++;
-			} else if( val === 1 ) {
-				yes++;
-			} else if( val === 2 ) {
-				maybe++;
+			if( tr.querySelector('select') ) {
+				const val = parseInt(tr.querySelector('select').value, 10);
+				if( val === 0 ) {
+					no++;
+				} else if( val === 1 ) {
+					yes++;
+				} else if( val === 2 ) {
+					maybe++;
+				} else {
+					count--;
+				}
 			} else {
 				count--;
 			}

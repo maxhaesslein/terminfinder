@@ -6,8 +6,6 @@ if( ! defined('TERMINFINDER') ) exit;
 if( $title ) echo '<h2>'.$title.'</h2>';
 if( $description ) echo '<p>'.$description.'</p>';
 
-// TODO: if $people is empty, allow creation of new events
-
 ?>
 
 <form id="lv-form" action="post.php" method="POST">
@@ -27,6 +25,9 @@ if( $description ) echo '<p>'.$description.'</p>';
 	<?php
 	
 	if( is_array($schedule) && count($schedule) ) {
+
+		// submission form
+
 		?>
 		<table id="schedule-list" class="schedule-list" data-max-yes="<?= $max_yes ?>" data-max-no="<?= $max_no ?>" data-max-yes-maybe="<?= $max_yes_maybe ?>" data-people-count="<?= $people_count ?>">
 			<thead>
@@ -163,6 +164,51 @@ if( $description ) echo '<p>'.$description.'</p>';
 			<p><button>Speichern</button></p>
 			<?php
 		}
+
+	} else {
+
+		// creation form
+		?>
+
+		<input type="hidden" name="action" value="new">
+
+		<p><label>
+			Termin-Titel: <input type="text" name="event_title" required>
+		</label></p>
+		<p><label>
+			Termin-Beschreibung (optional): <input type="text" name="event_description">
+		</label></p>
+		<p><label>
+			Dein Name: <input type="text" name="name" required>
+		</label></p>
+
+		<strong>Termine:</strong>
+		<table id="new-table">
+			<tr id="new-event-template" hidden>
+				<td>
+					<label><input type="text" name="event_slot_name[]" placeholder="Datum, Uhrzeit"></label>
+				</td>
+				<td>
+					<select name="event_slot_selection[]">
+						<option value="1" selected>Ja</option>
+						<option value="2">Vielleicht</option>
+					</select>
+				</td>
+				<td>
+					<button title="Termin entfernen">X</button>
+				</td>
+			</tr>
+			<tfoot>
+				<tr>
+					<th colspan="3">
+						<button id="add-event">Termin hinzufügen</button>
+					</th>
+				</tr>
+			</tfoot>
+		</table>
+
+		<p><button>Anlegen</button></p>
+		<?php
 
 	}
 	?>
