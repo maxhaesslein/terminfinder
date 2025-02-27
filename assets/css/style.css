@@ -3,14 +3,14 @@
 	--color-form-border: #999;
 	--color-border: #ddd;
 	--color-hover: #efefef;
-	--color-edited: #ffa;
+	--color-winner: #ffa;
 }
 
 body {
 	padding-bottom: 80px;
 }
 
-input, button {
+input, select, button {
 	box-sizing: border-box;
 	padding: 4px;
 	font: inherit;
@@ -22,6 +22,54 @@ input, button {
 		padding: 4px 8px;
 	}
 
-.submit {
-	text-align: left;
+table {
+	table-layout: fixed;
+	border-collapse: collapse;
+	border: 2px solid var(--color-border);
+	text-align: center;
 }
+
+td,
+th {
+	text-align: center;
+	padding: 5px;
+	border: 1px solid var(--color-border);
+}
+
+	td.topic,
+	th.topic {
+		text-align: left;
+	}
+
+td.veil,
+td.line,
+td.okay {
+	padding: 0;
+	width: 50px;
+	position: relative;
+}
+
+	td label {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-sizing: border-box;
+	}
+
+tr:hover td {
+	background: var(--color-hover);
+}
+
+tr.edited td {
+	background: var(--color-edited);
+}
+
+	table tr.event-winner td {
+		background: var(--color-winner);
+	}
