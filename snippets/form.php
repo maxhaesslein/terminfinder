@@ -6,6 +6,8 @@ if( ! defined('TERMINFINDER') ) exit;
 if( $title ) echo '<h2>'.$title.'</h2>';
 if( $description ) echo '<p>'.$description.'</p>';
 
+// TODO: if $people is empty, allow creation of new events
+// TODO: save form data
 
 ?>
 
@@ -27,7 +29,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 	
 	if( is_array($schedule) && count($schedule) ) {
 		?>
-		<table class="schedule-list">
+		<table id="schedule-list" class="schedule-list" data-max-yes="<?= $max_yes ?>" data-max-no="<?= $max_no ?>" data-max-yes-maybe="<?= $max_yes_maybe ?>" data-people-count="<?= $people_count ?>">
 			<thead>
 				<tr>
 					<th>
@@ -40,10 +42,10 @@ if( $description ) echo '<p>'.$description.'</p>';
 						Ja
 					</th>
 					<th>
-						Nein
+						Vielleicht
 					</th>
 					<th>
-						Vielleicht
+						Nein
 					</th>
 					<?php
 					foreach( $people as $person ) {
@@ -73,7 +75,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 			if( $yes + $maybe === $max_yes_maybe ) $class[] = 'event-winner';
 
 			?>
-			<tr class="<?= implode(' ', $class ) ?>">
+			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $yes ?>" data-no="<?= $no ?>" data-maybe="<?= $maybe ?>">
 				<td>
 					<strong title="<?= $id ?>"><?= $name ?></strong>
 				</td>
@@ -84,7 +86,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 						<option value="0" selected>Nein</option>
 					</select>
 				</td>
-				<td>
+				<td class="yes">
 					<?php
 					if( $max_yes === $yes ) {
 						if( $yes === $people_count ) {
@@ -97,7 +99,10 @@ if( $description ) echo '<p>'.$description.'</p>';
 					}
 					?>
 				</td>
-				<td>
+				<td class="maybe">
+					<?= $maybe ?>/<?= $people_count ?>
+				</td>
+				<td class="no">
 					<?php
 					if( $max_no === $no ) {
 						echo '<strong>'.$no.'</strong>/'.$people_count;
@@ -105,9 +110,6 @@ if( $description ) echo '<p>'.$description.'</p>';
 						echo $no.'/'.$people_count;
 					}
 					?>
-				</td>
-				<td>
-					<?= $maybe ?>/<?= $people_count ?>
 				</td>
 				<?php
 				foreach( $people as $person ) {
@@ -117,9 +119,19 @@ if( $description ) echo '<p>'.$description.'</p>';
 					$p_events = $person['events'] ?? [];
 					$option = $p_events[$id] ?? false;
 
+					if( $option === 0 ) {
+						$option_string = 'Nein';
+					} else if( $option === 1 ) {
+						$option_string = 'Ja';
+					} else if( $option === 2 ) {
+						$option_string = 'Vielleicht';
+					} else {
+						$option_string = '[Fehler]';
+					}
+
 					?>
 					<td>
-						<?= $option ?>
+						<?= $option_string ?>
 					</td>
 					<?php
 				}

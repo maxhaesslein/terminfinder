@@ -53,7 +53,7 @@ $data = [
 			'name' => 'Tester',
 			'events' => [
 				'2702_14001800' => 2,
-				'2702_18002200' => 2,
+				'2702_18002200' => 1,
 				'2802_18002200' => 0,
 			]
 		],
@@ -80,13 +80,13 @@ foreach( $people as $person ) {
 	$events = $person['events'] ?? [];
 
 	foreach( $events as $id => $option ) {
-		if( $option === 0 ) {
+		if( $option === 0 ) { // no
 			if( ! isset($schedule[$id]['no']) ) $schedule[$id]['no'] = 0;
 			$schedule[$id]['no']++;
-		} elseif( $option === 1 ) {
+		} elseif( $option === 1 ) { // yes
 			if( ! isset($schedule[$id]['yes']) ) $schedule[$id]['yes'] = 0;
 			$schedule[$id]['yes']++;
-		} elseif( $option === 2 ) {
+		} elseif( $option === 2 ) { // maybe
 			if( ! isset($schedule[$id]['maybe']) ) $schedule[$id]['maybe'] = 0;
 			$schedule[$id]['maybe']++;
 		}
@@ -97,11 +97,11 @@ foreach( $people as $person ) {
 $max_yes = 0;
 $max_no = 0;
 $max_yes_maybe = 0;
-foreach( $schedule as $id => $event ) {
+foreach( $schedule as $id => $ev ) {
 
-	$yes = $event['yes'] ?? 0;
-	$no = $event['no'] ?? 0;
-	$maybe = $event['maybe'] ?? 0;
+	$yes = $ev['yes'] ?? 0;
+	$no = $ev['no'] ?? 0;
+	$maybe = $ev['maybe'] ?? 0;
 
 	if( $yes > $max_yes ) $max_yes = $yes;
 	if( $no > $max_no ) $max_no = $no;

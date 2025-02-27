@@ -73,3 +73,9 @@ tr.edited td {
 	table tr.event-winner td {
 		background: var(--color-winner);
 	}
+	
+		table tr.event-winner td.yes,
+		table tr.event-winner td.no,
+		table tr.event-winner td.maybe {
+			font-weight: bold;
+		}
