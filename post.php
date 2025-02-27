@@ -107,16 +107,23 @@ if( $action === 'new' ) {
 		url_redirect($redirect.'&error=events');
 	}
 
-	if( ! is_array($data['people']) ) $data['people'] = [];
-	$data['people'][] = [
+	$people[] = [
 		'name' => $name,
 		'events' => $new_events
 	];
+
+	$data['people'] = $people;
 
 
 	if( ! file_put_contents("data/".$event.".json", json_encode($data)) ) {
 		url_redirect($redirect.'&error=save');
 	}
+
+	$user_hash = password_hash($name, PASSWORD_BCRYPT);
+	$user_hash_safe = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($user_hash));
+
+	$redirect .= '&user='.$user_hash_safe;
+
 
 	url_redirect($redirect.'&success');
 

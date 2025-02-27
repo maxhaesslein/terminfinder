@@ -68,6 +68,27 @@ foreach( $schedule as $id => $ev ) {
 $people_count = count($people);
 
 
+$user_hash = false;
+$user_data = false;
+if( ! empty($_REQUEST['user']) ) {
+	$user_hash = base64_decode(str_replace(['-', '_'], ['+', '/'], $_REQUEST['user']));
+
+	for( $i = 0; $i < count($people); $i++ ) {
+
+		$person = $people[$i];
+
+		if( ! password_verify($person['name'], $user_hash) ) continue;
+
+		$user_data = $person;
+
+		array_splice($people, $i, 1);
+		break;
+
+	}
+}
+
+
+
 $debug = false;
 if( isset($_SERVER['LOCAL_DEV']) ) {
 	$debug = true;

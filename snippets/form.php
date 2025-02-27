@@ -16,6 +16,11 @@ if( $description ) echo '<p>'.$description.'</p>';
 		echo '<p style="color: red;"><strong>Fehler</strong> beim speichern :( -- '.$_REQUEST['error'].'</p>';
 	} elseif( isset($_REQUEST['success']) ) {
 		echo '<p style="color: green;"><strong>Erfolgreich gespeichert</strong></p>';
+		
+		$link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
+	. "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]?event=$event&user=".$_REQUEST['user'];
+
+		echo '<p>Deine Link, um deinen Eintrag wieder zu bearbeiten, ist: <a href="'.$link.'">'.$link.'</a></p>';
 	}
 
 	?>
@@ -26,24 +31,16 @@ if( $description ) echo '<p>'.$description.'</p>';
 	
 	if( is_array($schedule) && count($schedule) ) {
 
-		// submission form
+		$people_count_js = $people_count;
+		if( $user_data ) $people_count_js--;
 
 		?>
-		<table id="schedule-list" class="schedule-list" data-max-yes="<?= $max_yes ?>" data-max-no="<?= $max_no ?>" data-max-yes-maybe="<?= $max_yes_maybe ?>" data-people-count="<?= $people_count ?>">
+		<table id="schedule-list" class="schedule-list" data-max-yes="<?= $max_yes ?>" data-max-no="<?= $max_no ?>" data-max-yes-maybe="<?= $max_yes_maybe ?>" data-people-count="<?= $people_count_js ?>">
 			<thead>
 				<tr>
 					<th>
 						Termin
 					</th>
-					<?php
-					if( ! isset($_GET['success']) ) {
-						?>
-					<th>
-						Auswahl
-					</th>
-						<?php
-					}
-					?>
 					<th>
 						Ja
 					</th>
@@ -52,6 +49,9 @@ if( $description ) echo '<p>'.$description.'</p>';
 					</th>
 					<th>
 						Nein
+					</th>
+					<th>
+						Deine Auswahl
 					</th>
 					<?php
 					foreach( $people as $person ) {
@@ -80,25 +80,31 @@ if( $description ) echo '<p>'.$description.'</p>';
 
 			if( $yes + $maybe === $max_yes_maybe ) $class[] = 'event-winner';
 
+			$selected_none = ' selected';
+			$selected_yes = '';
+			$selected_maybe = '';
+			$selected_no = '';
+
+			if( $user_data && ! empty($user_data['events']) ) {
+				$selected_value = $user_data['events'][$id] ?? false;
+
+				if( $selected_value === 0 ) {
+					$selected_none = '';
+					$selected_no = ' selected';
+				} elseif( $selected_value === 1 ) {
+					$selected_none = '';
+					$selected_yes = ' selected';
+				} elseif( $selected_value === 2 ) {
+					$selected_none = '';
+					$selected_maybe = ' selected';
+				}
+			}
+
 			?>
 			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $yes ?>" data-no="<?= $no ?>" data-maybe="<?= $maybe ?>">
 				<td>
 					<strong title="<?= $id ?>"><?= $name ?></strong>
 				</td>
-				<?php
-				if( ! isset($_GET['success']) ) {
-					?>
-				<td>
-					<select name="entry_<?= $id ?>" required>
-						<option value="" selected>--</option>
-						<option value="1">Ja</option>
-						<option value="2">Wenn's sein muss</option>
-						<option value="0">Nein</option>
-					</select>
-				</td>
-					<?php
-				}
-				?>
 				<td class="yes">
 					<?php
 					if( $max_yes === $yes ) {
@@ -123,6 +129,14 @@ if( $description ) echo '<p>'.$description.'</p>';
 						echo $no.'/'.$people_count;
 					}
 					?>
+				</td>
+				<td>
+					<select name="entry_<?= $id ?>" required>
+						<option value=""<?= $selected_none ?>>--</option>
+						<option value="1"<?= $selected_yes ?>>Ja</option>
+						<option value="2"<?= $selected_maybe ?>>Wenn's sein muss</option>
+						<option value="0"<?= $selected_no ?>>Nein</option>
+					</select>
 				</td>
 				<?php
 				foreach( $people as $person ) {
@@ -156,15 +170,23 @@ if( $description ) echo '<p>'.$description.'</p>';
 		</table>
 
 		<?php
-		if( ! isset($_GET['success']) ) {
+		if( $user_data && ! empty($user_data['name']) ) {
+			?>
+			<p>Name: <strong><?= $user_data['name'] ?></strong></p>
+			<input type="hidden" name="name" value="<?= $user_data['name'] ?>">
+			<input type="hidden" name="user" value="<?= $_REQUEST['user'] ?>">
+			<?php
+		} else {
 			?>
 			<p><label>
-				Name: <input type="text" name="name" required>
+				Name: <input type="text" name="name" value="" required>
 			</label></p>
-			<p><button>Speichern</button></p>
 			<?php
 		}
+		?>
+		<p><button>Speichern</button></p>
 
+		<?php
 	} else {
 
 		// creation form
