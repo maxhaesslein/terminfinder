@@ -92,7 +92,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 					<select name="entry_<?= $id ?>" required>
 						<option value="" selected>--</option>
 						<option value="1">Ja</option>
-						<option value="2">Vielleicht</option>
+						<option value="2">Wenn's sein muss</option>
 						<option value="0">Nein</option>
 					</select>
 				</td>
@@ -137,7 +137,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 					} else if( $option === 1 ) {
 						$option_string = 'Ja';
 					} else if( $option === 2 ) {
-						$option_string = 'Vielleicht';
+						$option_string = "Wenn's sein muss";
 					} else {
 						$option_string = '--';
 					}
@@ -191,7 +191,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 				<td>
 					<select name="event_slot_selection[]">
 						<option value="1" selected>Ja</option>
-						<option value="2">Vielleicht</option>
+						<option value="2">Wenn's sein muss</option>
 					</select>
 				</td>
 				<td>
