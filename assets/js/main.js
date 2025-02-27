@@ -61,7 +61,8 @@
 		for( const tr of trs ) {
 			let yes = parseInt(tr.dataset.yes, 10),
 				no = parseInt(tr.dataset.no, 10),
-				maybe = parseInt(tr.dataset.maybe, 10);
+				maybe = parseInt(tr.dataset.maybe, 10),
+				count = people_count;
 
 			const val = parseInt(tr.querySelector('select').value, 10);
 			if( val === 0 ) {
@@ -70,21 +71,23 @@
 				yes++;
 			} else if( val === 2 ) {
 				maybe++;
+			} else {
+				count--;
 			}
 
-			let yes_string = yes+'/'+people_count,
-				no_string = no+'/'+people_count,
-				maybe_string = maybe+'/'+people_count;
+			let yes_string = yes+'/'+count,
+				no_string = no+'/'+count,
+				maybe_string = maybe+'/'+count;
 
 			if( max_yes === yes ) {
 				if( yes === people_count ) {
 					yes_string = '<strong>'+yes_string+'</strong>';
 				} else {
-					yes_string = '<strong>'+yes+'</strong>/'+people_count;
+					yes_string = '<strong>'+yes+'</strong>/'+count;
 				}
 			}
 			if( max_no === no ) {
-				no_string = '<strong>'+no+'</strong>/'+people_count;
+				no_string = '<strong>'+no+'</strong>/'+count;
 			}
 
 

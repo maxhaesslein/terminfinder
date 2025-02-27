@@ -80,10 +80,11 @@ if( $description ) echo '<p>'.$description.'</p>';
 					<strong title="<?= $id ?>"><?= $name ?></strong>
 				</td>
 				<td>
-					<select name="<?= $id ?>">
+					<select name="<?= $id ?>" required>
+						<option value="" selected>--</option>
 						<option value="1">Ja</option>
 						<option value="2">Vielleicht</option>
-						<option value="0" selected>Nein</option>
+						<option value="0">Nein</option>
 					</select>
 				</td>
 				<td class="yes">
@@ -126,7 +127,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 					} else if( $option === 2 ) {
 						$option_string = 'Vielleicht';
 					} else {
-						$option_string = '[Fehler]';
+						$option_string = '--';
 					}
 
 					?>
