@@ -1,0 +1,27 @@
+
+:root {
+	--color-form-border: #999;
+	--color-border: #ddd;
+	--color-hover: #efefef;
+	--color-edited: #ffa;
+}
+
+body {
+	padding-bottom: 80px;
+}
+
+input, button {
+	box-sizing: border-box;
+	padding: 4px;
+	font: inherit;
+	border: 1px solid var(--color-form-border);
+	border-radius: 3px;
+}
+
+	button {
+		padding: 4px 8px;
+	}
+
+.submit {
+	text-align: left;
+}
