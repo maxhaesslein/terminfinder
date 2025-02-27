@@ -40,16 +40,30 @@ tr:hover td {
 	background: var(--color-hover);
 }
 
-tr.edited td {
-	background: var(--color-edited);
+tr.dragging {
+	opacity: 0.5;
 }
 
-	table tr.event-winner td {
-		background: var(--color-winner);
+td.dragger {
+	cursor: grab;
+	user-select: none;
+	padding: 0 5px;
+}
+
+	td.dragger::before {
+		content: "⬍";
+		display: inline-block;
+		color: #777;
+		vertical-align: middle;
+		font-size: 26px;
 	}
-	
-		table tr.event-winner td.yes,
-		table tr.event-winner td.no,
-		table tr.event-winner td.maybe {
-			font-weight: bold;
-		}
+
+table tr.event-winner td {
+	background: var(--color-winner);
+}
+
+	table tr.event-winner td.yes,
+	table tr.event-winner td.no,
+	table tr.event-winner td.maybe {
+		font-weight: bold;
+	}

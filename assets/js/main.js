@@ -29,8 +29,44 @@
 			addEventButton.addEventListener('click', addEvent);
 		}
 
+		handleDragDrop();
+
 	}	
 	document.addEventListener( 'DOMContentLoaded', init, false );
+
+
+	function handleDragDrop(){
+		const table = document.getElementById('new-table');
+		if( ! table ) return;
+
+		const tableBody = table.querySelector('tbody');
+
+		let draggedRow = null;
+
+		tableBody.addEventListener("dragstart", (event) => {
+			draggedRow = event.target;
+			event.target.classList.add("dragging");
+		});
+
+		tableBody.addEventListener("dragover", (event) => {
+			event.preventDefault();
+			const targetRow = event.target.closest("tr");
+			if (targetRow && targetRow !== draggedRow) {
+				const bounding = targetRow.getBoundingClientRect();
+				const offset = event.clientY - bounding.top;
+				if (offset > bounding.height / 2) {
+					targetRow.after(draggedRow);
+				} else {
+					targetRow.before(draggedRow);
+				}
+			}
+		});
+
+		tableBody.addEventListener("dragend", () => {
+			draggedRow.classList.remove("dragging");
+			draggedRow = null;
+		});
+	}
 
 
 	function addEvent(e) {
@@ -39,6 +75,8 @@
 
 		e.preventDefault();
 
+		isModified = true;
+
 		const template = document.getElementById('new-event-template').cloneNode(true);
 		template.removeAttribute('id');
 		template.removeAttribute('hidden');
@@ -46,8 +84,7 @@
 		template.querySelector('input').required = true;
 		template.querySelector('select').required = true;
 
-		table.insertBefore(template, table.querySelector('tfoot'));
-
+		table.querySelector('tbody').appendChild(template);
 	}
 
 

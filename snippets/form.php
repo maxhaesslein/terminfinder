@@ -184,30 +184,33 @@ if( $description ) echo '<p>'.$description.'</p>';
 
 		<strong>Termine:</strong>
 		<table id="new-table">
-			<tr id="new-event-template" hidden>
-				<td>
-					<label><input type="text" name="event_slot_name[]" placeholder="Datum, Uhrzeit"></label>
-				</td>
-				<td>
-					<select name="event_slot_selection[]">
-						<option value="1" selected>Ja</option>
-						<option value="2">Wenn's sein muss</option>
-					</select>
-				</td>
-				<td>
-					<button title="Termin entfernen">X</button>
-				</td>
-			</tr>
+			<tbody>
+				<tr id="new-event-template" draggable="true" hidden>
+					<td class="dragger"></td>
+					<td>
+						<label><input type="text" name="event_slot_name[]" placeholder="Datum, Uhrzeit"></label>
+					</td>
+					<td>
+						<select name="event_slot_selection[]">
+							<option value="1" selected>Ja</option>
+							<option value="2">Wenn's sein muss</option>
+						</select>
+					</td>
+					<td>
+						<button title="Termin entfernen">X</button>
+					</td>
+				</tr>
+			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="3">
+					<th colspan="4">
 						<button id="add-event">Termin hinzufügen</button>
 					</th>
 				</tr>
 			</tfoot>
 		</table>
 
-		<p><button>Termin Anlegen</button></p>
+		<p><button>Termin anlegen</button></p>
 		<?php
 
 	}
