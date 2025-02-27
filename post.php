@@ -87,7 +87,11 @@ if( $action === 'new' ) {
 		url_redirect($redirect.'&error=save');
 	}
 
-	url_redirect($redirect);
+	$user_hash = password_hash($name, PASSWORD_BCRYPT);
+	$user_hash_safe = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($user_hash));
+	$redirect .= '&user='.$user_hash_safe;
+
+	url_redirect($redirect.'&success');
 
 } else {
 	// submission
@@ -121,9 +125,7 @@ if( $action === 'new' ) {
 
 	$user_hash = password_hash($name, PASSWORD_BCRYPT);
 	$user_hash_safe = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($user_hash));
-
 	$redirect .= '&user='.$user_hash_safe;
-
 
 	url_redirect($redirect.'&success');
 

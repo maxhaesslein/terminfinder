@@ -77,14 +77,16 @@
 
 		isModified = true;
 
-		const template = document.getElementById('new-event-template').cloneNode(true);
-		template.removeAttribute('id');
-		template.removeAttribute('hidden');
-		template.querySelector('button').addEventListener('click', removeEvent);
-		template.querySelector('input').required = true;
-		template.querySelector('select').required = true;
+		const newTr = document.getElementById('new-event-template').cloneNode(true);
+		newTr.removeAttribute('id');
+		newTr.removeAttribute('hidden');
+		newTr.querySelector('button').addEventListener('click', removeEvent);
+		newTr.querySelector('input').required = true;
+		newTr.querySelector('select').required = true;
 
-		table.querySelector('tbody').appendChild(template);
+		table.querySelector('tbody').appendChild(newTr);
+
+		newTr.querySelector('input').focus();
 	}
 
 
@@ -104,14 +106,13 @@
 
 		const trs = table.querySelectorAll('tr.event-line');
 
-		let people_count = parseInt(table.dataset.peopleCount, 10) + 1;
+		let people_count = parseInt(table.dataset.peopleCount, 10);
 
 		let max_yes = 0,
 			max_no = 0,
 			max_yes_maybe = 0;
 
 		for( const tr of trs ) {
-
 
 			let yes = parseInt(tr.dataset.yes, 10),
 				no = parseInt(tr.dataset.no, 10),
@@ -171,10 +172,13 @@
 			}
 
 
-			if( yes+maybe === max_yes_maybe ) {
+			tr.classList.remove('event-winner');
+			tr.classList.remove('event-maybe-winner');
+			
+			if( yes === max_yes ) {
 				tr.classList.add('event-winner');
-			} else {
-				tr.classList.remove('event-winner');
+			} else if( yes+maybe === max_yes_maybe ) {
+				tr.classList.add('event-maybe-winner')
 			}
 
 			tr.querySelector('td.yes').innerHTML = yes_string;

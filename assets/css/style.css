@@ -3,6 +3,7 @@
 	--color-form-border: #999;
 	--color-border: #ddd;
 	--color-hover: #efefef;
+	--color-maybe-winner: #ffd;
 	--color-winner: #ffa;
 }
 
@@ -57,6 +58,10 @@ td.dragger {
 		vertical-align: middle;
 		font-size: 26px;
 	}
+
+table tr.event-maybe-winner td {
+	background: var(--color-maybe-winner);
+}
 
 table tr.event-winner td {
 	background: var(--color-winner);

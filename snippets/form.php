@@ -20,7 +20,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 		$link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
 	. "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]?event=$event&user=".$_REQUEST['user'];
 
-		echo '<p>Deine Link, um deinen Eintrag wieder zu bearbeiten, ist: <a href="'.$link.'">'.$link.'</a></p>';
+		echo '<p>Dein Link, um deinen Eintrag wieder zu bearbeiten, ist: <em><a href="'.$link.'">'.$link.'</a></</p>';
 	}
 
 	?>
@@ -31,11 +31,11 @@ if( $description ) echo '<p>'.$description.'</p>';
 	
 	if( is_array($schedule) && count($schedule) ) {
 
-		$people_count_js = $people_count;
-		if( $user_data ) $people_count_js--;
+		$data_people_count = $people_count;
+		if( ! $user_data ) $data_people_count++;
 
 		?>
-		<table id="schedule-list" class="schedule-list" data-max-yes="<?= $max_yes ?>" data-max-no="<?= $max_no ?>" data-max-yes-maybe="<?= $max_yes_maybe ?>" data-people-count="<?= $people_count_js ?>">
+		<table id="schedule-list" class="schedule-list" data-people-count="<?= $data_people_count ?>">
 			<thead>
 				<tr>
 					<th>
@@ -78,7 +78,12 @@ if( $description ) echo '<p>'.$description.'</p>';
 
 			$class = [ 'event-line' ];
 
-			if( $yes + $maybe === $max_yes_maybe ) $class[] = 'event-winner';
+			if( $yes === $max_yes ) $class[] = 'event-winner';
+			elseif( $yes+$maybe === $max_yes_maybe ) $class[] = 'event-maybe-winner';
+
+			$data_yes = $yes;
+			$data_no = $no;
+			$data_maybe = $maybe;
 
 			$selected_none = ' selected';
 			$selected_yes = '';
@@ -91,17 +96,20 @@ if( $description ) echo '<p>'.$description.'</p>';
 				if( $selected_value === 0 ) {
 					$selected_none = '';
 					$selected_no = ' selected';
+					$data_no--;
 				} elseif( $selected_value === 1 ) {
 					$selected_none = '';
 					$selected_yes = ' selected';
+					$data_yes--;
 				} elseif( $selected_value === 2 ) {
 					$selected_none = '';
 					$selected_maybe = ' selected';
+					$data_maybe--;
 				}
 			}
 
 			?>
-			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $yes ?>" data-no="<?= $no ?>" data-maybe="<?= $maybe ?>">
+			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>">
 				<td>
 					<strong title="<?= $id ?>"><?= $name ?></strong>
 				</td>
