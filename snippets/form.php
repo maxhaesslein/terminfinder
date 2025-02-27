@@ -207,7 +207,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 			</tfoot>
 		</table>
 
-		<p><button>Anlegen</button></p>
+		<p><button>Termin Anlegen</button></p>
 		<?php
 
 	}
