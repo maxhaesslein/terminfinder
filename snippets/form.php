@@ -7,7 +7,6 @@ if( $title ) echo '<h2>'.$title.'</h2>';
 if( $description ) echo '<p>'.$description.'</p>';
 
 // TODO: if $people is empty, allow creation of new events
-// TODO: save form data
 
 ?>
 
@@ -35,9 +34,15 @@ if( $description ) echo '<p>'.$description.'</p>';
 					<th>
 						Termin
 					</th>
+					<?php
+					if( ! isset($_GET['success']) ) {
+						?>
 					<th>
 						Auswahl
 					</th>
+						<?php
+					}
+					?>
 					<th>
 						Ja
 					</th>
@@ -79,14 +84,20 @@ if( $description ) echo '<p>'.$description.'</p>';
 				<td>
 					<strong title="<?= $id ?>"><?= $name ?></strong>
 				</td>
+				<?php
+				if( ! isset($_GET['success']) ) {
+					?>
 				<td>
-					<select name="<?= $id ?>" required>
+					<select name="entry_<?= $id ?>" required>
 						<option value="" selected>--</option>
 						<option value="1">Ja</option>
 						<option value="2">Vielleicht</option>
 						<option value="0">Nein</option>
 					</select>
 				</td>
+					<?php
+				}
+				?>
 				<td class="yes">
 					<?php
 					if( $max_yes === $yes ) {
@@ -143,13 +154,16 @@ if( $description ) echo '<p>'.$description.'</p>';
 		?>
 		</table>
 
-		<p><label>
-			Name: <input type="text" name="name" required>
-		</label></p>
-
-		<p><button>Speichern</button></p>
-
 		<?php
+		if( ! isset($_GET['success']) ) {
+			?>
+			<p><label>
+				Name: <input type="text" name="name" required>
+			</label></p>
+			<p><button>Speichern</button></p>
+			<?php
+		}
+
 	}
 	?>
 

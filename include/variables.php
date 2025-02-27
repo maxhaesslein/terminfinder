@@ -25,51 +25,6 @@ if( $event ) {
 }
 
 
-// DEBUG
-$data = [
-	'title' => 'Shadowdark - Lost Citadel of the Scarlet Minotaur',
-	'description' => 'Lorem Ipsum dolor sit amet',
-	'schedule' => [
-		'2702_14001800' => [
-			'name' => '27.02., 14:00-18:00'
-		],
-		'2702_18002200' => [
-			'name' => '27.02., 18:00-22:00'
-		],
-		'2802_18002200' => [
-			'name' => '28.02., 18:00-22:00'
-		]
-	],
-	'people' => [
-		[
-			'name' => 'Max',
-			'events' => [
-				'2702_14001800' => 1,
-				'2702_18002200' => 1,
-				'2802_18002200' => 1,
-			]
-		],
-		[
-			'name' => 'Tester',
-			'events' => [
-				'2702_14001800' => 2,
-				'2702_18002200' => 1,
-				'2802_18002200' => 0,
-			]
-		],
-		[
-			'name' => 'Tester 2',
-			'events' => [
-				'2702_14001800' => 0,
-				'2702_18002200' => 1,
-				'2802_18002200' => 2,
-			]
-		]
-	]
-];
-// DEBUG end
-
-
 $title = $data['title'] ?? false;
 $description = $data['description'] ?? false;
 $schedule = $data['schedule'] ?? [];
