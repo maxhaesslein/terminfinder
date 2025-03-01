@@ -61,6 +61,10 @@ td.dragger {
 		font-size: 26px;
 	}
 
+td.event-title {
+	text-align: left;
+}
+
 table tr.event-winner-1 td {
 	background: var(--color-winner-1);
 }

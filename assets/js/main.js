@@ -5,7 +5,6 @@
 	function init(){
 
 		updateLineCounts();
-
 		for( const input of document.querySelectorAll('input') ) {
 			input.addEventListener('change', function(){
 				isModified = true;
@@ -168,8 +167,7 @@
 			let yes = parseInt(tr.dataset.yes, 10),
 				no = parseInt(tr.dataset.no, 10),
 				maybe = parseInt(tr.dataset.maybe, 10),
-				id = tr.dataset.id,
-				count = people_count;
+				id = tr.dataset.id;
 
 			if( tr.querySelector('select') ) {
 				const val = parseInt(tr.querySelector('select').value, 10);
@@ -179,28 +177,19 @@
 					yes++;
 				} else if( val === 2 ) {
 					maybe++;
-				} else {
-					count--;
 				}
-			} else {
-				count--;
 			}
 
-			let yes_string = yes+'/'+count,
-				no_string = no+'/'+count,
-				maybe_string = maybe+'/'+count;
+			let yes_string = yes,
+				no_string = no,
+				maybe_string = maybe;
 
 			if( max_yes === yes ) {
-				if( yes === people_count ) {
-					yes_string = '<strong>'+yes_string+'</strong>';
-				} else {
-					yes_string = '<strong>'+yes+'</strong>/'+count;
-				}
+				yes_string = '<strong>'+yes_string+'</strong>';
 			}
 			if( max_no === no ) {
-				no_string = '<strong>'+no+'</strong>/'+count;
+				no_string = '<strong>'+no+'</strong>';
 			}
-
 
 			tr.classList.remove('event-winner-1', 'event-winner-2', 'event-winner-3');
 			

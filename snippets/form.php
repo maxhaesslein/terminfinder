@@ -41,6 +41,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 					<th>
 						Termin
 					</th>
+					<th></th>
 					<th>
 						✅
 					</th>
@@ -50,9 +51,11 @@ if( $description ) echo '<p>'.$description.'</p>';
 					<th>
 						❌
 					</th>
+					<th></th>
 					<th>
 						Deine Auswahl
 					</th>
+					<th></th>
 					<?php
 					foreach( $people as $person ) {
 						$name = $person['name'] ?? false;
@@ -115,34 +118,32 @@ if( $description ) echo '<p>'.$description.'</p>';
 
 			?>
 			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>" data-id="<?= $id ?>">
-				<td>
+				<td class="event-title">
 					<strong title="<?= $id ?>"><?= $name ?></strong>
 				</td>
+				<td class="spacer"></td>
 				<td class="yes">
 					<?php
 					if( $max_yes === $yes ) {
-						if( $yes === $people_count ) {
-							echo '<strong>'.$yes.'/'.$people_count.'</strong>';
-						} else {
-							echo '<strong>'.$yes.'</strong>/'.$people_count;
-						}
+						echo '<strong>'.$yes.'</strong>';
 					} else {
-						echo $yes.'/'.$people_count;
+						echo $yes;
 					}
 					?>
 				</td>
 				<td class="maybe">
-					<?= $maybe ?>/<?= $people_count ?>
+					<?= $maybe ?>
 				</td>
 				<td class="no">
 					<?php
 					if( $max_no === $no ) {
-						echo '<strong>'.$no.'</strong>/'.$people_count;
+						echo '<strong>'.$no.'</strong>';
 					} else {
-						echo $no.'/'.$people_count;
+						echo $no;
 					}
 					?>
 				</td>
+				<td class="spacer"></td>
 				<td>
 					<select name="entry_<?= $id ?>" required>
 						<option value=""<?= $selected_none ?>>--</option>
@@ -151,6 +152,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 						<option value="0"<?= $selected_no ?>>Nein</option>
 					</select>
 				</td>
+				<td class="spacer"></td>
 				<?php
 				foreach( $people as $person ) {
 					$name = $person['name'] ?? false;
