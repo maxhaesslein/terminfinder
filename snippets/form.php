@@ -78,8 +78,13 @@ if( $description ) echo '<p>'.$description.'</p>';
 
 			$class = [ 'event-line' ];
 
-			if( $yes === $max_yes ) $class[] = 'event-winner';
-			elseif( $yes+$maybe === $max_yes_maybe ) $class[] = 'event-maybe-winner';
+			if( count($winners) && in_array($id, $winners[1]) ) {
+				$class[] = 'event-winner-1';
+			} elseif( count($winners) > 1 && in_array($id, $winners[2]) ) {
+				$class[] = 'event-winner-2';
+			} elseif( count($winners) > 2 && in_array($id, $winners[3]) ) {
+				$class[] = 'event-winner-3';
+			}
 
 			$data_yes = $yes;
 			$data_no = $no;
@@ -109,7 +114,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 			}
 
 			?>
-			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>">
+			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>" data-id="<?= $id ?>">
 				<td>
 					<strong title="<?= $id ?>"><?= $name ?></strong>
 				</td>

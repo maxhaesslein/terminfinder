@@ -110,13 +110,15 @@
 
 		let max_yes = 0,
 			max_no = 0,
-			max_yes_maybe = 0;
+			max_yes_maybe = 0,
+			best_matches = [];
 
 		for( const tr of trs ) {
 
 			let yes = parseInt(tr.dataset.yes, 10),
 				no = parseInt(tr.dataset.no, 10),
-				maybe = parseInt(tr.dataset.maybe, 10);
+				maybe = parseInt(tr.dataset.maybe, 10),
+				id = tr.dataset.id;
 
 			if( tr.querySelector('select') ) {
 				const val = parseInt(tr.querySelector('select').value, 10);
@@ -133,12 +135,40 @@
 			if( no > max_no ) max_no = no;
 			if( yes+maybe > max_yes_maybe ) max_yes_maybe = yes+maybe;
 			
+			best_matches.push({
+				'points': yes*3 + maybe*2,
+				'id': id
+			});
+
 		}
+
+		let winners = {};
+
+		if( best_matches.length ) {
+			best_matches.sort(function(a, b){ return b.points-a.points; });
+
+			let c_points = best_matches[0].points,
+				place = 1;
+			for( var best_match of best_matches ) {
+				if( best_match.points < c_points ) {
+					place++;
+					c_points = best_match.points;
+				}
+				if( place > 3 ) break;
+
+				if( ! winners[place] ) winners[place] = [];
+
+				winners[place].push(best_match.id);
+			}
+
+		}
+
 
 		for( const tr of trs ) {
 			let yes = parseInt(tr.dataset.yes, 10),
 				no = parseInt(tr.dataset.no, 10),
 				maybe = parseInt(tr.dataset.maybe, 10),
+				id = tr.dataset.id,
 				count = people_count;
 
 			if( tr.querySelector('select') ) {
@@ -172,13 +202,14 @@
 			}
 
 
-			tr.classList.remove('event-winner');
-			tr.classList.remove('event-maybe-winner');
+			tr.classList.remove('event-winner-1', 'event-winner-2', 'event-winner-3');
 			
-			if( yes === max_yes ) {
-				tr.classList.add('event-winner');
-			} else if( yes+maybe === max_yes_maybe ) {
-				tr.classList.add('event-maybe-winner')
+			if( winners[1] && winners[1].includes(id) ) {
+				tr.classList.add('event-winner-1');
+			} else if( winners[2] && winners[2].includes(id) ) {
+				tr.classList.add('event-winner-2');
+			} else if( winners[3] && winners[3].includes(id) ) {
+				tr.classList.add('event-winner-3');
 			}
 
 			tr.querySelector('td.yes').innerHTML = yes_string;

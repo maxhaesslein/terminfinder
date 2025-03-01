@@ -49,6 +49,8 @@ foreach( $people as $person ) {
 }
 
 
+$best_matches = [];
+
 $max_yes = 0;
 $max_no = 0;
 $max_yes_maybe = 0;
@@ -62,6 +64,36 @@ foreach( $schedule as $id => $ev ) {
 	if( $no > $max_no ) $max_no = $no;
 
 	if( $yes + $maybe > $max_yes_maybe ) $max_yes_maybe = $yes + $maybe;
+
+	$best_matches[] = [
+		'points' => $yes*3 + $maybe*2,
+		'id' => $id
+	];
+
+}
+
+
+$winners = [];
+
+if( count($best_matches) ) {
+	usort( $best_matches, function($a, $b){
+		return $b['points'] - $a['points'];
+	});
+
+	$c_points = $best_matches[0]['points'];
+	$place = 1;
+	foreach( $best_matches as $best_match ) {
+		if( $best_match['points'] < $c_points) {
+			$place++;
+			$c_points = $best_match['points'];
+		}
+		if( $place > 3 ) break;
+
+		if( ! isset($winners[$place]) ) $winners[$place] = [];
+
+		$winners[$place][] = $best_match['id'];
+
+	}
 }
 
 
