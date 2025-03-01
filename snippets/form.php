@@ -42,13 +42,13 @@ if( $description ) echo '<p>'.$description.'</p>';
 						Termin
 					</th>
 					<th>
-						Ja
+						✅
 					</th>
 					<th>
-						Vielleicht
+						❔
 					</th>
 					<th>
-						Nein
+						❌
 					</th>
 					<th>
 						Deine Auswahl
@@ -160,11 +160,11 @@ if( $description ) echo '<p>'.$description.'</p>';
 					$option = $p_events[$id] ?? false;
 
 					if( $option === 0 ) {
-						$option_string = 'Nein';
+						$option_string = '❌';
 					} else if( $option === 1 ) {
-						$option_string = 'Ja';
+						$option_string = '✅';
 					} else if( $option === 2 ) {
-						$option_string = "Wenn's sein muss";
+						$option_string = "❔";
 					} else {
 						$option_string = '--';
 					}
