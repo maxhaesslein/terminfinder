@@ -118,8 +118,8 @@ if( $description ) echo '<p>'.$description.'</p>';
 
 			?>
 			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>" data-id="<?= $id ?>">
-				<td class="event-title">
-					<strong title="<?= $id ?>"><?= $name ?></strong>
+				<td class="event-title" title="<?= $id ?>">
+					<?= $name ?>
 				</td>
 				<td class="spacer"></td>
 				<td class="yes">

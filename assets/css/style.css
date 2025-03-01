@@ -71,7 +71,8 @@ table tr.event-winner-1 td {
 
 	table tr.event-winner-1 td.yes,
 	table tr.event-winner-1 td.no,
-	table tr.event-winner-1 td.maybe {
+	table tr.event-winner-1 td.maybe,
+	table tr.event-winner-1 td.event-title {
 		font-weight: bold;
 	}
 
