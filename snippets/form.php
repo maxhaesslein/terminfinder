@@ -38,24 +38,21 @@ if( $description ) echo '<p>'.$description.'</p>';
 		<table id="schedule-list" class="schedule-list" data-people-count="<?= $data_people_count ?>">
 			<thead>
 				<tr>
-					<th>
+					<th class="event-title">
 						Termin
 					</th>
-					<th></th>
-					<th>
+					<th class="yes">
 						✅
 					</th>
-					<th>
+					<th class="maybe">
 						❔
 					</th>
-					<th>
+					<th class="no">
 						❌
 					</th>
-					<th></th>
-					<th>
+					<th class="selector">
 						Deine Auswahl
 					</th>
-					<th></th>
 					<?php
 					foreach( $people as $person ) {
 						$name = $person['name'] ?? false;
@@ -121,7 +118,6 @@ if( $description ) echo '<p>'.$description.'</p>';
 				<td class="event-title" title="<?= $id ?>">
 					<?= $name ?>
 				</td>
-				<td class="spacer"></td>
 				<td class="yes">
 					<?php
 					if( $max_yes === $yes ) {
@@ -143,8 +139,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 					}
 					?>
 				</td>
-				<td class="spacer"></td>
-				<td>
+				<td class="selector">
 					<select name="entry_<?= $id ?>" required>
 						<option value=""<?= $selected_none ?>>--</option>
 						<option value="1"<?= $selected_yes ?>>Ja</option>
@@ -152,7 +147,6 @@ if( $description ) echo '<p>'.$description.'</p>';
 						<option value="0"<?= $selected_no ?>>Nein</option>
 					</select>
 				</td>
-				<td class="spacer"></td>
 				<?php
 				foreach( $people as $person ) {
 					$name = $person['name'] ?? false;

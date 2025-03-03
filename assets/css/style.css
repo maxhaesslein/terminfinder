@@ -65,6 +65,15 @@ td.event-title {
 	text-align: left;
 }
 
+td.event-title,
+th.event-title,
+td.no,
+th.no,
+td.selector,
+th.selector {
+	border-right-width: 5px;
+}
+
 table tr.event-winner-1 td {
 	background: var(--color-winner-1);
 }
