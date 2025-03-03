@@ -35,6 +35,12 @@ if( $description ) echo '<p>'.$description.'</p>';
 		if( ! $user_data ) $data_people_count++;
 
 		?>
+		<p id="sort-wrapper" hidden><label>
+			Sortieren nach: <select id="sort-order" name="sort-order">
+				<option value="chronological" selected>Chronologisch</option>
+				<option value="vote-count">Zustimmung</option>
+			</select>
+		</label></p>
 		<table id="schedule-list" class="schedule-list" data-people-count="<?= $data_people_count ?>">
 			<thead>
 				<tr>

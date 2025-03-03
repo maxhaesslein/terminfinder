@@ -5,6 +5,7 @@
 	function init(){
 
 		updateLineCounts();
+
 		for( const input of document.querySelectorAll('input') ) {
 			input.addEventListener('change', function(){
 				isModified = true;
@@ -12,6 +13,7 @@
 		}
 
 		for( const select of document.querySelectorAll('select') ) {
+			if( select.id === 'sort-order' ) continue;
 			select.addEventListener('change', function(){
 				isModified = true;
 				updateLineCounts();
@@ -29,9 +31,90 @@
 		}
 
 		handleDragDrop();
+		handleSorting();
 
 	}	
 	document.addEventListener( 'DOMContentLoaded', init, false );
+
+
+	function handleSorting(){
+		const table = document.getElementById('schedule-list');
+		if( ! table ) return;
+
+		const sortWrapper = document.getElementById('sort-wrapper');
+		if( ! sortWrapper ) return;
+
+		const sortSelect = document.getElementById('sort-order');
+		if( ! sortSelect ) return;
+
+		sortWrapper.hidden = false;
+
+		var i = 0;
+		for( const tr of table.querySelector('tbody').querySelectorAll('tr') ) {
+			tr.dataset.originalOrder = i;
+			i++;
+		}
+
+		sortSelect.addEventListener('change', updateSorting);
+
+		updateSorting();
+
+	}
+
+	function updateSorting() {
+
+		const sortSelect = document.getElementById('sort-order');
+		if( ! sortSelect ) return;
+
+		const table = document.getElementById('schedule-list');
+		if( ! table ) return;
+
+		const tbody = table.querySelector('tbody');
+
+		const val = sortSelect.value;
+
+		let rows = Array.from(tbody.getElementsByTagName("tr"));
+
+		rows.sort(function(rowA, rowB){
+			let a,b;
+
+			if( val === 'chronological' ) {
+				a = parseInt(rowA.dataset.originalOrder, 10);
+				b = parseInt(rowB.dataset.originalOrder, 10);
+			} else if( val === 'vote-count' ) {
+				b = getCount(rowA);
+				a = getCount(rowB);
+			} else {
+				return 0;
+			}
+
+			return a > b ? 1 : a < b ? -1 : 0;
+		});
+
+		rows.forEach(row => tbody.appendChild(row));
+
+	}
+
+
+	function getCount(tr) {
+		let yes = parseInt(tr.dataset.yes, 10),
+			no = parseInt(tr.dataset.no, 10),
+			maybe = parseInt(tr.dataset.maybe, 10),
+			id = tr.dataset.id;
+
+		if( tr.querySelector('select') ) {
+			const val = parseInt(tr.querySelector('select').value, 10);
+			if( val === 0 ) {
+				no++;
+			} else if( val === 1 ) {
+				yes++;
+			} else if( val === 2 ) {
+				maybe++;
+			}
+		}
+
+		return yes*3+maybe*2-no;
+	}
 
 
 	function handleDragDrop(){
@@ -135,7 +218,7 @@
 			if( yes+maybe > max_yes_maybe ) max_yes_maybe = yes+maybe;
 			
 			best_matches.push({
-				'points': yes*3 + maybe*2,
+				'points': yes*3 + maybe*2 - no,
 				'id': id
 			});
 
@@ -205,6 +288,8 @@
 			tr.querySelector('td.no').innerHTML = no_string;
 			tr.querySelector('td.maybe').innerHTML = maybe_string;
 		}
+
+		updateSorting();
 
 	}
 
