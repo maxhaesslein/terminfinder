@@ -32,6 +32,7 @@
 
 		handleDragDrop();
 		handleSorting();
+		handlePersonHiding();
 
 	}	
 	document.addEventListener( 'DOMContentLoaded', init, false );
@@ -290,6 +291,34 @@
 		}
 
 		updateSorting();
+
+	}
+
+
+	function handlePersonHiding(){
+
+		const table = document.getElementById('schedule-list');
+		if( ! table ) return;
+
+		const persons = table.querySelectorAll('.person');
+		if( ! persons ) return;
+
+		const personToggles = table.querySelectorAll('.person-toggle');
+		if( ! personToggles ) return;
+
+		for( const person of persons ) {
+			person.classList.add('hidden');
+		}
+
+		for( const toggle of personToggles ) {
+			toggle.classList.add('visible');
+		}
+
+		table.querySelector('td.person-toggle').addEventListener('click', function(){
+			for( const person of persons ) {
+				person.classList.toggle('hidden');
+			}
+		});
 
 	}
 

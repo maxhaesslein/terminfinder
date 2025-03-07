@@ -1,5 +1,6 @@
 
 :root {
+	--color-background: #fff;
 	--color-form-border: #999;
 	--color-border: #ddd;
 	--color-hover: #efefef;
@@ -30,6 +31,7 @@ table {
 	border-collapse: collapse;
 	border: 2px solid var(--color-border);
 	text-align: center;
+	background: var(--color-background);
 }
 
 td,
@@ -64,6 +66,27 @@ td.dragger {
 td.event-title {
 	text-align: left;
 }
+
+th.person-toggle,
+td.person-toggle {
+	display: none;
+}
+
+	th.person-toggle.visible,
+	td.person-toggle.visible {
+		display: revert;
+		cursor: pointer;
+		background: var(--color-background);
+	}
+
+th.person,
+td.person {
+}
+
+	th.person.hidden,
+	td.person.hidden {
+		display: none;
+	}
 
 td.event-title,
 th.event-title,

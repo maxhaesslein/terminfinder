@@ -64,15 +64,17 @@ if( $description ) echo '<p>'.$description.'</p>';
 						$name = $person['name'] ?? false;
 						if( ! $name ) continue;
 						?>
-						<th>
+						<th class="person">
 							<?= $name ?>
 						</th>
 						<?php
 					}
 					?>
+					<th class="person-toggle"></th>
 				</tr>
 			</thead>
 		<?php
+		$first = true;
 		foreach( $schedule as $id => $event ) {
 
 			$name = $event['name'] ?? false;
@@ -172,8 +174,17 @@ if( $description ) echo '<p>'.$description.'</p>';
 					}
 
 					?>
-					<td>
+					<td class="person">
 						<?= $option_string ?>
+					</td>
+					<?php
+				}
+
+				if( $first ) {
+					$first = false;
+					?>
+					<td class="person-toggle" rowspan="<?= count($schedule) ?>">
+						&harr;
 					</td>
 					<?php
 				}
