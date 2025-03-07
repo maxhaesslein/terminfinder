@@ -2,7 +2,7 @@
 
 if( ! defined('TERMINFINDER') ) exit;
 
-$version = '0.4';
+$version = '0.5';
 
 
 $event = $_REQUEST['event'] ?? false;
