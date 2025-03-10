@@ -74,7 +74,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 				</tr>
 			</thead>
 		<?php
-		$first = true;
+		$i = 0;
 		foreach( $schedule as $id => $event ) {
 
 			$name = $event['name'] ?? false;
@@ -122,7 +122,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 			}
 
 			?>
-			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>" data-id="<?= $id ?>">
+			<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>" data-id="<?= $id ?>" data-sort="<?= $i ?>">
 				<td class="event-title" title="<?= $id ?>">
 					<?= $name ?>
 				</td>
@@ -180,14 +180,15 @@ if( $description ) echo '<p>'.$description.'</p>';
 					<?php
 				}
 
-				if( $first ) {
-					$first = false;
+				if( $i == 0 ) {
 					?>
 					<td class="person-toggle" rowspan="<?= count($schedule) ?>">
 						&harr;
 					</td>
 					<?php
 				}
+
+				$i++;
 				?>
 			</tr>
 			<?php

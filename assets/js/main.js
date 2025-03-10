@@ -50,12 +50,6 @@
 
 		sortWrapper.hidden = false;
 
-		var i = 0;
-		for( const tr of table.querySelector('tbody').querySelectorAll('tr') ) {
-			tr.dataset.originalOrder = i;
-			i++;
-		}
-
 		sortSelect.addEventListener('change', updateSorting);
 
 		updateSorting();
@@ -80,8 +74,8 @@
 			let a,b;
 
 			if( val === 'chronological' ) {
-				a = parseInt(rowA.dataset.originalOrder, 10);
-				b = parseInt(rowB.dataset.originalOrder, 10);
+				a = parseInt(rowA.dataset.sort, 10);
+				b = parseInt(rowB.dataset.sort, 10);
 			} else if( val === 'vote-count' ) {
 				b = getCount(rowA);
 				a = getCount(rowB);
