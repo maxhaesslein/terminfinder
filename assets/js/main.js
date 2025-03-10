@@ -94,6 +94,11 @@
 
 		rows.forEach(row => tbody.appendChild(row));
 
+
+		// fix last column
+		const toggle = table.querySelector('td.person-toggle');
+		rows[0].appendChild(toggle);
+
 	}
 
 
