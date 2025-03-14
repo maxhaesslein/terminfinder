@@ -17,6 +17,12 @@ body {
 	font-family: var(--font-family);
 }
 
+main {
+	margin: 0 auto;
+	width: fit-content;
+	max-width: 100%;
+}
+
 input, select, button {
 	box-sizing: border-box;
 	padding: 4px;
