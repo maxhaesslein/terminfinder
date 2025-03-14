@@ -2,7 +2,7 @@
 
 if( ! defined('TERMINFINDER') ) exit;
 
-$version = '0.7';
+$version = '1.0.0';
 
 
 $lang = $options['language'] ?? 'en';
