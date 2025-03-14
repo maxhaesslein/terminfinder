@@ -20,7 +20,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 		$link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
 	. "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]?event=$event&user=".$_REQUEST['user'];
 
-		echo '<p>'.__('Your link for re-editing your entry is').': <em><a href="'.$link.'">'.$link.'</a></</p>';
+		echo '<p>'.__('Your link for re-editing your entry is').': <em><a href="'.$link.'">'.$link.'</a></em></p>';
 	}
 
 	?>
