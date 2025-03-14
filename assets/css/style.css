@@ -1,5 +1,7 @@
 
 :root {
+	--font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 	--color-background: #fff;
 	--color-form-border: #999;
 	--color-border: #ddd;
@@ -12,6 +14,7 @@
 
 body {
 	padding-bottom: 80px;
+	font-family: var(--font-family);
 }
 
 input, select, button {
