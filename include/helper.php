@@ -23,3 +23,20 @@ function sanitize_title( $string, $replace = true ) {
 
 	return htmlspecialchars($string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 }
+
+
+function get_hash( $string ) {
+	// NOTE: this is a simple and quick hashing function, and not cryptographically save.
+
+	return hash('sha256', $string);
+}
+
+
+function hash_verify( $string, $hash ) {
+
+	if ( get_hash($string) === $hash ) {
+		return true;
+	}
+
+	return false;
+}
