@@ -4,7 +4,7 @@ if( ! defined('TERMINFINDER') ) exit;
 
 $texts = [
 	'open' => 'open',
-	'event id' => 'event id',
+	'session id' => 'session id',
 	'Error' => 'Error',
 	'while saving' => 'while saving',
 	'Successfully saved' => 'Successfully saved',
