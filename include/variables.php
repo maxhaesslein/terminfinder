@@ -5,6 +5,8 @@ if( ! defined('TERMINFINDER') ) exit;
 $version = '0.6';
 
 
+$lang = 'en'; // TODO: set via config
+
 $event = $_REQUEST['event'] ?? false;
 
 

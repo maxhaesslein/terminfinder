@@ -4,6 +4,7 @@ define( 'TERMINFINDER', 'post' );
 
 include_once('include/helper.php');
 include_once('include/variables.php');
+include_once('include/language.php');
 
 
 if( ! $event ) {

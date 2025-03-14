@@ -3,7 +3,7 @@
 if( ! defined('TERMINFINDER') ) exit;
 
 ?><!DOCTYPE html>
-<html lang="de-DE">
+<html lang="<?= $locale_code ?>">
 <head>
 	<meta charset="utf-8">
 

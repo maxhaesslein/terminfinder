@@ -4,6 +4,7 @@ define( 'TERMINFINDER', 'view' );
 
 include_once('include/helper.php');
 include_once('include/variables.php');
+include_once('include/language.php');
 
 include_once('snippets/head.php');
 ?>

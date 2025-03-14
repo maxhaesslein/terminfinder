@@ -13,14 +13,14 @@ if( $description ) echo '<p>'.$description.'</p>';
 	<?php
 
 	if( ! empty($_REQUEST['error']) ) {
-		echo '<p style="color: red;"><strong>Fehler</strong> beim speichern :( -- '.$_REQUEST['error'].'</p>';
+		echo '<p style="color: red;"><strong>'.__('Error').'</strong> '.__('while saving').' :( -- '.$_REQUEST['error'].'</p>';
 	} elseif( isset($_REQUEST['success']) ) {
-		echo '<p style="color: green;"><strong>Erfolgreich gespeichert</strong></p>';
+		echo '<p style="color: green;"><strong>'.__('Successfully saved').'</strong></p>';
 		
 		$link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
 	. "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]?event=$event&user=".$_REQUEST['user'];
 
-		echo '<p>Dein Link, um deinen Eintrag wieder zu bearbeiten, ist: <em><a href="'.$link.'">'.$link.'</a></</p>';
+		echo '<p>'.__('Your link for re-editing your entry is').': <em><a href="'.$link.'">'.$link.'</a></</p>';
 	}
 
 	?>
@@ -36,16 +36,16 @@ if( $description ) echo '<p>'.$description.'</p>';
 
 		?>
 		<p id="sort-wrapper" hidden><label>
-			Sortieren nach: <select id="sort-order" name="sort-order">
-				<option value="chronological" selected>Chronologisch</option>
-				<option value="vote-count">Zustimmung</option>
+			<?= __('Sort by') ?>: <select id="sort-order" name="sort-order">
+				<option value="chronological" selected><?= __('Sequentially') ?></option>
+				<option value="vote-count"><?= __('Vote Count') ?></option>
 			</select>
 		</label></p>
 		<table id="schedule-list" class="schedule-list" data-people-count="<?= $data_people_count ?>">
 			<thead>
 				<tr>
 					<th class="event-title">
-						Termin
+						<?= __('Session') ?>
 					</th>
 					<th class="yes">
 						✅
@@ -57,7 +57,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 						❌
 					</th>
 					<th class="selector">
-						Deine Auswahl
+						<?= __('Your selection') ?>
 					</th>
 					<?php
 					foreach( $people as $person ) {
@@ -150,9 +150,9 @@ if( $description ) echo '<p>'.$description.'</p>';
 				<td class="selector">
 					<select name="entry_<?= $id ?>" required>
 						<option value=""<?= $selected_none ?>>--</option>
-						<option value="1"<?= $selected_yes ?>>Ja</option>
-						<option value="2"<?= $selected_maybe ?>>Wenn's sein muss</option>
-						<option value="0"<?= $selected_no ?>>Nein</option>
+						<option value="1"<?= $selected_yes ?>><?= __('Yes') ?></option>
+						<option value="2"<?= $selected_maybe ?>><?= ('If need be') ?></option>
+						<option value="0"<?= $selected_no ?>><?= __('No') ?></option>
 					</select>
 				</td>
 				<?php
@@ -199,19 +199,19 @@ if( $description ) echo '<p>'.$description.'</p>';
 		<?php
 		if( $user_data && ! empty($user_data['name']) ) {
 			?>
-			<p>Name: <strong><?= $user_data['name'] ?></strong></p>
+			<p><?= __('Name') ?>: <strong><?= $user_data['name'] ?></strong></p>
 			<input type="hidden" name="name" value="<?= $user_data['name'] ?>">
 			<input type="hidden" name="user" value="<?= $_REQUEST['user'] ?>">
 			<?php
 		} else {
 			?>
 			<p><label>
-				Name: <input type="text" name="name" value="" required>
+				<?= __('Your Name') ?>: <input type="text" name="name" placeholder="<?= __('Name') ?>" value="" required>
 			</label></p>
 			<?php
 		}
 		?>
-		<p><button>Speichern</button></p>
+		<p><button><?= __('Save') ?></button></p>
 
 		<?php
 	} else {
@@ -222,44 +222,44 @@ if( $description ) echo '<p>'.$description.'</p>';
 		<input type="hidden" name="action" value="new">
 
 		<p><label>
-			Termin-Titel: <input type="text" name="event_title" required>
+			<?= __('Session Title') ?>: <input type="text" name="event_title" required>
 		</label></p>
 		<p><label>
-			Termin-Beschreibung (optional): <input type="text" name="event_description">
+			<?= __('Session Details') ?> (<?= __('optional') ?>): <input type="text" name="event_description">
 		</label></p>
 		<p><label>
-			Dein Name: <input type="text" name="name" required>
+			<?= __('Your Name') ?>: <input type="text" name="name" required>
 		</label></p>
 
-		<strong>Termine:</strong>
+		<strong><?= __('Dates') ?>:</strong>
 		<table id="new-table">
 			<tbody>
 				<tr id="new-event-template" draggable="true" hidden>
 					<td class="dragger"></td>
 					<td>
-						<label><input type="text" name="event_slot_name[]" placeholder="Datum, Uhrzeit"></label>
+						<label><input type="text" name="event_slot_name[]" placeholder="<?= __('Date, Time') ?>"></label>
 					</td>
 					<td>
 						<select name="event_slot_selection[]">
-							<option value="1" selected>Ja</option>
-							<option value="2">Wenn's sein muss</option>
+							<option value="1" selected><?= __('Yes') ?></option>
+							<option value="2"><?= __('If need be') ?></option>
 						</select>
 					</td>
 					<td>
-						<button title="Termin entfernen">X</button>
+						<button title="<?= __('Remove Date') ?>">X</button>
 					</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
 					<th colspan="4">
-						<button id="add-event">Termin hinzufügen</button>
+						<button id="add-event"><?= __('Add Date') ?></button>
 					</th>
 				</tr>
 			</tfoot>
 		</table>
 
-		<p><button>Termin anlegen</button></p>
+		<p><button><?= __('Create Session') ?></button></p>
 		<?php
 
 	}
