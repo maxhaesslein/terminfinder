@@ -4,7 +4,7 @@ Session scheduling for TTRPG groups
 
 ## Installation
 
-Copy all files into a folder on your webserver. Requires PHP 8.0 or greater. The folder `data/` needs to be writeable.
+Copy all files into a folder on your webserver. Requires PHP 8.0 or greater.
 
 ## Config
 
