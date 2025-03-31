@@ -32,7 +32,7 @@ $texts = [
 	'Prefer to attend' => 'Prefer to attend',
 	'Optional' => 'Optional',
 	'Allow Priority Select' => 'Allow Priority Select',
-	'set yes for at least half of the dates' => 'set yes for at least half of the dates',
-	'set yes or maybe for at least half of the dates' => 'set yes or maybe for at least half of the dates',
+	'set yes for at least half of the dates, or lower the priority' => 'set yes for at least half of the dates, or lower the priority',
+	'set yes or maybe for at least half of the dates, or lower the priority' => 'set yes or maybe for at least half of the dates, or lower the priority',
 	'no restrictions' => 'no restrictions',
 ];

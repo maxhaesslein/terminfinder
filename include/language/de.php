@@ -32,7 +32,7 @@ $texts = [
 	'Prefer to attend' => 'Möchte gerne teilnehmen',
 	'Optional' => 'Teilnahme optional',
 	'Allow Priority Select' => 'Priorität-Auswahl aktivieren',
-	'set yes for at least half of the dates' => 'Stimme bei mindestens der Hälfte der Termine mit Ja',
-	'set yes or maybe for at least half of the dates' => 'Stimme bei mindestens der Hälfte der Termine mit Ja oder Vielleicht',
+	'set yes for at least half of the dates, or lower the priority' => 'Stimme bei mindestens der Hälfte der Termine mit Ja, oder setze die Priorität herab',
+	'set yes or maybe for at least half of the dates, or lower the priority' => 'Stimme bei mindestens der Hälfte der Termine mit Ja oder Vielleicht, oder setze die Priorität herab',
 	'no restrictions' => 'Keine Einschränkungen',
 ];
