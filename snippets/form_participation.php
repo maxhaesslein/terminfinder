@@ -189,13 +189,18 @@ if( $priority_select_enabled ) {
 	$selected = $user_data['priority'] ?? DEFAULT_PRIORITY;
 
 	?>
-	<p><label>
-		<?= __('Priority') ?>: <select name="priority"required>
-			<option value="3"<?php if( $selected === 3 ) echo ' selected'; ?>><?= __('Really want to attend') ?></option>
-			<option value="2"<?php if( $selected === 2 ) echo ' selected'; ?>><?= __('Prefer to attend') ?></option>
-			<option value="1"<?php if( $selected === 1 ) echo ' selected'; ?>><?= __('Optional') ?></option>
-		</select>
-	</label></p>
+	<p>
+		<label>
+			<?= __('Priority') ?>: <select id="priority-select" name="priority"required>
+				<option value="3"<?php if( $selected === 3 ) echo ' selected'; ?>><?= __('Really want to attend') ?></option>
+				<option value="2"<?php if( $selected === 2 ) echo ' selected'; ?>><?= __('Prefer to attend') ?></option>
+				<option value="1"<?php if( $selected === 1 ) echo ' selected'; ?>><?= __('Optional') ?></option>
+			</select>
+		</label>
+		<span id="priority-select-description-3" class="priority-select-description">(<?= __('set yes for at least half of the dates') ?>)</span>
+		<span id="priority-select-description-2" class="priority-select-description">(<?= __('set yes or maybe for at least half of the dates') ?>)</span>
+		<span id="priority-select-description-1" class="priority-select-description">(<?= __('no restrictions') ?>)</span>
+	</p>
 	<?php
 }
 ?>

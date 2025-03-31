@@ -124,3 +124,13 @@ table tr.event-winner-2 td {
 table tr.event-winner-3 td {
 	background: var(--color-winner-3);
 }
+
+.priority-select-description {
+	display: none;
+}
+
+	.priority-select-description--visible {
+		display: block;
+		margin-top: 0.4em;
+		font-size: 0.8em;
+	}

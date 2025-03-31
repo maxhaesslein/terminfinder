@@ -12,6 +12,7 @@ function initParticipationForm(){
 
 	handleSorting();
 	handlePersonHiding();
+	handlePrioritySwitching();
 
 }
 document.addEventListener( 'DOMContentLoaded', initParticipationForm, false );
@@ -235,4 +236,32 @@ function getCount(tr) {
 	}
 
 	return yes*3+maybe*2-no;
+}
+
+
+function handlePrioritySwitching(){
+
+	const prioritySelect = document.getElementById('priority-select');
+	if( ! prioritySelect ) return;
+
+	prioritySelect.addEventListener('change', recheckPriorityConditions);
+
+	recheckPriorityConditions();
+
+}
+
+
+function recheckPriorityConditions(){
+
+	const currentPriority = document.getElementById('priority-select').value;
+
+	for( const span of document.querySelectorAll('.priority-select-description') ) {
+		span.classList.remove('priority-select-description--visible');
+	}
+
+	const newPriorityDescription = document.getElementById('priority-select-description-'+currentPriority);
+	if( ! newPriorityDescription ) return;
+
+	newPriorityDescription.classList.add('priority-select-description--visible');
+
 }
