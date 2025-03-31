@@ -5,8 +5,7 @@
 	--color-background: #fff;
 	--color-form-border: #999;
 	--color-border: #ddd;
-	--color-hover: #efefef;
-
+	
 	--color-winner-1: #ff6;
 	--color-winner-2: #ff9;
 	--color-winner-3: #ffe;
@@ -86,10 +85,6 @@ th {
 		bottom: 0;
 		background: var(--color-border);
 	}
-
-tr:hover td {
-	background: var(--color-hover);
-}
 
 tr.dragging {
 	opacity: 0.5;
