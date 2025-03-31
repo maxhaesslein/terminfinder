@@ -206,7 +206,6 @@ if( $description ) echo '<p>'.$description.'</p>';
 		} else {
 			?>
 			<p><label>
-				<?= __('Your Name') ?>: <input type="text" name="name" placeholder="<?= __('Name') ?>" value="" required>
 			</label></p>
 			<?php
 		}
@@ -228,7 +227,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 			<?= __('Session Details') ?> (<?= __('optional') ?>): <input type="text" name="event_description">
 		</label></p>
 		<p><label>
-			<?= __('Your Name') ?>: <input type="text" name="name" required>
+			<?= __('Name') ?>: <input type="text" name="name" required>
 		</label></p>
 
 		<strong><?= __('Dates') ?>:</strong>

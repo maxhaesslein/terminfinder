@@ -22,7 +22,6 @@ $texts = [
 	'If need be' => 'Wenn\'s sein muss',
 	'Save' => 'Speichern',
 	'Name' => 'Name',
-	'Your Name' => 'Dein Name',
 	'optional' => 'optional',
 	'Dates' => 'Termine',
 	'Add Date' => 'Termin hinzufügen',

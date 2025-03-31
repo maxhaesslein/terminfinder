@@ -22,7 +22,6 @@ $texts = [
 	'If need be' => 'If need be',
 	'Save' => 'Save',
 	'Name' => 'Name',
-	'Your Name' => 'Your Name',
 	'optional' => 'optional',
 	'Dates' => 'Dates',
 	'Add Date' => 'Add Date',
