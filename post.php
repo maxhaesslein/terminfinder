@@ -27,10 +27,6 @@ if( empty($name) ) {
 	url_redirect($redirect.'&error=name');
 }
 
-$priority = $_POST['priority'] ?? '';
-$priority = (int) trim($priority);
-
-
 if( $action === 'new' ) {
 	include( 'snippets/post_creation.php' );
 } else {
