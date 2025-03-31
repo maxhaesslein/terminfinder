@@ -31,4 +31,5 @@ $texts = [
 	'Really want to attend' => 'Möchte auf jeden Fall teilnehmen',
 	'Prefer to attend' => 'Möchte gerne teilnehmen',
 	'Optional' => 'Teilnahme optional',
+	'Allow Priority Select' => 'Priorität-Auswahl aktivieren',
 ];

@@ -31,4 +31,5 @@ $texts = [
 	'Really want to attend' => 'Really want to attend',
 	'Prefer to attend' => 'Prefer to attend',
 	'Optional' => 'Optional',
+	'Allow Priority Select' => 'Allow Priority Select',
 ];

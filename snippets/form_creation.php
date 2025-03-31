@@ -44,4 +44,8 @@ if( ! defined('TERMINFINDER') ) exit;
 	</tfoot>
 </table>
 
+<p><label>
+	<input type="checkbox" name="priority-select-enabled" value="1"><?= __('Allow Priority Select') ?>
+</label></p>
+
 <p><button><?= __('Create Session') ?></button></p>

@@ -53,6 +53,7 @@ if( $event ) {
 
 $title = $data['title'] ?? false;
 $description = $data['description'] ?? false;
+$priority_select_enabled = $data['priority-select-enabled'] ?? false;
 $schedule = $data['schedule'] ?? [];
 $people = $data['people'] ?? [];
 

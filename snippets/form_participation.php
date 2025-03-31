@@ -179,14 +179,25 @@ if( $user_data && ! empty($user_data['name']) ) {
 	<p><label>
 		<?= __('Name') ?>: <input type="text" name="name" placeholder="<?= __('Name') ?>" value="" required>
 	</label></p>
+	<?php
+}
+?>
+
+<?php
+if( $priority_select_enabled ) {
+
+	$selected = $user_data['priority'] ?? DEFAULT_PRIORITY;
+
+	?>
 	<p><label>
 		<?= __('Priority') ?>: <select name="priority"required>
-			<option value="3"><?= __('Really want to attend') ?></option>
-			<option value="2" selected><?= __('Prefer to attend') ?></option>
-			<option value="1"><?= __('Optional') ?></option>
+			<option value="3"<?php if( $selected === 3 ) echo ' selected'; ?>><?= __('Really want to attend') ?></option>
+			<option value="2"<?php if( $selected === 2 ) echo ' selected'; ?>><?= __('Prefer to attend') ?></option>
+			<option value="1"<?php if( $selected === 1 ) echo ' selected'; ?>><?= __('Optional') ?></option>
 		</select>
 	</label></p>
 	<?php
 }
 ?>
+
 <p><button id="submit-button"><?= __('Save') ?></button></p>

@@ -42,6 +42,13 @@ if( $action === 'new' ) {
 
 	$description = $_POST['event_description'] ?? '';
 
+	$priority_select_enabled = $_POST['priority-select-enabled'] ?? false;
+	if( $priority_select_enabled === '1' ) {
+		$priority_select_enabled = true;
+	} else {
+		$priority_select_enabled = false;
+	}
+
 	$slot_names = $_POST['event_slot_name'] ?? [];
 	$slot_selections = $_POST['event_slot_selection'] ?? [];
 
@@ -79,6 +86,7 @@ if( $action === 'new' ) {
 		'title' => $title,
 		'description' => $description,
 		'schedule' => $schedule,
+		'priority-select-enabled' => $priority_select_enabled,
 		'people' => [
 			[
 				'name' => $name,
