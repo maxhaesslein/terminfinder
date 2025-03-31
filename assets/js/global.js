@@ -27,7 +27,6 @@ function init(){
 document.addEventListener( 'DOMContentLoaded', init, false );
 
 
-
 window.addEventListener('beforeunload', function(event){
 	if( ! isModified ) return;
 	event.preventDefault();

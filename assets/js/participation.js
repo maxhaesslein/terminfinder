@@ -2,7 +2,6 @@
 function initParticipationForm(){
 
 	updateLineCounts();
-	updatePriorityState();
 
 	for( const input of document.querySelectorAll('input') ) {
 		input.addEventListener('change', function(){
@@ -16,7 +15,7 @@ function initParticipationForm(){
 	for( const select of document.querySelectorAll('select') ) {
 		if( select.id === 'sort-order' ) continue;
 		select.addEventListener('change', function(){
-			handleSubmitButton();
+			handleSubmitButton(); // needs to be called before 'updatePriorityState()'
 			updateLineCounts();
 			updatePriorityState();
 		});
@@ -25,7 +24,9 @@ function initParticipationForm(){
 	handleSorting();
 	handlePersonHiding();
 	handlePrioritySwitching();
+	
 	handleSubmitButton();
+	updatePriorityState();
 
 }
 document.addEventListener( 'DOMContentLoaded', initParticipationForm, false );
