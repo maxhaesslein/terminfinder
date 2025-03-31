@@ -69,15 +69,33 @@ for( $i = 0; $i < count($people); $i++ ) {
 	$events = $person['events'] ?? [];
 
 	foreach( $events as $id => $option ) {
+
+		if( ! isset($schedule[$id]) ) continue;
+
 		if( $option === 0 ) { // no
+
 			if( ! isset($schedule[$id]['no']) ) $schedule[$id]['no'] = 0;
 			$schedule[$id]['no']++;
+
+			if( ! isset($schedule[$id]['no_value']) ) $schedule[$id]['no_value'] = 0;
+			$schedule[$id]['no_value'] += $person['priority'];
+
 		} elseif( $option === 1 ) { // yes
+
 			if( ! isset($schedule[$id]['yes']) ) $schedule[$id]['yes'] = 0;
 			$schedule[$id]['yes']++;
+
+			if( ! isset($schedule[$id]['yes_value']) ) $schedule[$id]['yes_value'] = 0;
+			$schedule[$id]['yes_value'] += $person['priority'];
+
 		} elseif( $option === 2 ) { // maybe
+
 			if( ! isset($schedule[$id]['maybe']) ) $schedule[$id]['maybe'] = 0;
 			$schedule[$id]['maybe']++;
+
+			if( ! isset($schedule[$id]['maybe_value']) ) $schedule[$id]['maybe_value'] = 0;
+			$schedule[$id]['maybe_value'] += $person['priority'];
+
 		}
 	}
 }
@@ -90,19 +108,17 @@ $max_no = 0;
 $max_yes_maybe = 0;
 foreach( $schedule as $id => $ev ) {
 
-	$yes = $ev['yes'] ?? 0;
-	$no = $ev['no'] ?? 0;
-	$maybe = $ev['maybe'] ?? 0;
+	$yes = $ev['yes_value'] ?? 0;
+	$no = $ev['no_value'] ?? 0;
+	$maybe = $ev['maybe_value'] ?? 0;
 
 	if( $yes > $max_yes ) $max_yes = $yes;
 	if( $no > $max_no ) $max_no = $no;
 
 	if( $yes + $maybe > $max_yes_maybe ) $max_yes_maybe = $yes + $maybe;
 
-	// TODO: also use priority of user, if available and activated
-
 	$best_matches[] = [
-		'points' => $yes*3 + $maybe*2 - $no,
+		'points' => $yes*6 + $maybe*3 - $no, // TODO: update in js
 		'id' => $id
 	];
 

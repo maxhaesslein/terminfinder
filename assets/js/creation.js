@@ -6,7 +6,6 @@ function initCreationForm(){
 	if( addEventButton ) {
 		addEventButton.addEventListener('click', addEvent);
 	}
-
 	
 }
 document.addEventListener( 'DOMContentLoaded', initCreationForm, false );

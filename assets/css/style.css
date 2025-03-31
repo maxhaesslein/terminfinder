@@ -112,6 +112,21 @@ td.person {
 		display: none;
 	}
 
+	th.person.priority-1,
+	td.person.priority-1 {
+		opacity: 0.6;
+	}
+
+	th.person.priority-2,
+	td.person.priority-2 {
+		opacity: 0.8;
+	}
+
+	th.person.priority-3,
+	td.person.priority-3 {
+		opacity: 1;
+	}
+
 td.event-title,
 th.event-title,
 td.no,

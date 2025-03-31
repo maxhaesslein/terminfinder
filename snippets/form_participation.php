@@ -34,9 +34,28 @@ if( ! $user_data ) $data_people_count++;
 			foreach( $people as $person ) {
 				$name = $person['name'] ?? false;
 				if( ! $name ) continue;
+
+				$class = ['person'];
+				$priority_string = '';
+
+				if( $priority_select_enabled ) {
+					$class[] = 'priority-'.$person['priority'];
+
+					if( $person['priority'] === 1 ) {
+						$priority_string = 'Prio 3';
+					} elseif( $person['priority'] === 2 ) {
+						$priority_string = 'Prio 2';
+					} elseif( $person['priority'] === 3 ) {
+						$priority_string = 'Prio 1';
+					}
+
+					$priority_string = '<br><small>('.$priority_string.')</small>';
+				}
+
 				?>
-				<th class="person">
+				<th class="<?= implode(' ', $class) ?>">
 					<?= $name ?>
+					<?= $priority_string ?>
 				</th>
 				<?php
 			}
@@ -131,6 +150,11 @@ foreach( $schedule as $id => $event ) {
 			$name = $person['name'] ?? false;
 			if( ! $name ) continue;
 
+			$class = ['person'];
+			if( $priority_select_enabled ) {
+				$class[] = 'priority-'.$person['priority'];
+			}
+
 			$p_events = $person['events'] ?? [];
 			$option = $p_events[$id] ?? false;
 
@@ -145,7 +169,7 @@ foreach( $schedule as $id => $event ) {
 			}
 
 			?>
-			<td class="person">
+			<td class="<?= implode(' ', $class) ?>">
 				<?= $option_string ?>
 			</td>
 			<?php
@@ -191,7 +215,7 @@ if( $priority_select_enabled ) {
 	?>
 	<p id="priority-select-wrapper">
 		<label>
-			<?= __('Priority') ?>: <select id="priority-select" name="priority"required>
+			<?= __('Priority') ?>: <select id="priority-select" name="priority" required>
 				<option value="3"<?php if( $selected === 3 ) echo ' selected'; ?>><?= __('Really want to attend') ?></option>
 				<option value="2"<?php if( $selected === 2 ) echo ' selected'; ?>><?= __('Prefer to attend') ?></option>
 				<option value="1"<?php if( $selected === 1 ) echo ' selected'; ?>><?= __('Optional') ?></option>

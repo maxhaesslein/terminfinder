@@ -24,7 +24,7 @@ function initParticipationForm(){
 	handleSorting();
 	handlePersonHiding();
 	handlePrioritySwitching();
-	
+
 	handleSubmitButton();
 	updatePriorityState();
 
