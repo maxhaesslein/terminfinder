@@ -27,4 +27,8 @@ $texts = [
 	'Add Date' => 'Add Date',
 	'Remove Date' => 'Remove Date',
 	'Date, Time' => 'Date, Time',
+	'Priority' => 'Priority',
+	'Really want to attend' => 'Really want to attend',
+	'Prefer to attend' => 'Prefer to attend',
+	'Optional' => 'Optional',
 ];

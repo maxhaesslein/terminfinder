@@ -27,4 +27,8 @@ $texts = [
 	'Add Date' => 'Termin hinzufügen',
 	'Remove Date' => 'Termin entfernen',
 	'Date, Time' => 'Datum, Uhrzeit',
+	'Priority' => 'Priorität',
+	'Really want to attend' => 'Möchte auf jeden Fall teilnehmen',
+	'Prefer to attend' => 'Möchte gerne teilnehmen',
+	'Optional' => 'Teilnahme optional',
 ];

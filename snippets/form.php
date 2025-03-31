@@ -206,6 +206,14 @@ if( $description ) echo '<p>'.$description.'</p>';
 		} else {
 			?>
 			<p><label>
+				<?= __('Name') ?>: <input type="text" name="name" placeholder="<?= __('Name') ?>" value="" required>
+			</label></p>
+			<p><label>
+				<?= __('Priority') ?>: <select name="priority"required>
+					<option value="3"><?= __('Really want to attend') ?></option>
+					<option value="2" selected><?= __('Prefer to attend') ?></option>
+					<option value="1"><?= __('Optional') ?></option>
+				</select>
 			</label></p>
 			<?php
 		}
