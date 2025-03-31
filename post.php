@@ -14,6 +14,10 @@ if( ! $event ) {
 
 $redirect = 'index.php?event='.$event;
 
+if( $user_hash ) {
+	$redirect .= '&user='.$user_hash;
+}
+
 
 $action = $_POST['action'] ?? false;
 
