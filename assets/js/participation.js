@@ -2,6 +2,7 @@
 function initParticipationForm(){
 
 	updateLineCounts();
+	updatePriorityState();
 
 	for( const input of document.querySelectorAll('input') ) {
 		input.addEventListener('change', function(){
@@ -17,6 +18,7 @@ function initParticipationForm(){
 		select.addEventListener('change', function(){
 			handleSubmitButton();
 			updateLineCounts();
+			updatePriorityState();
 		});
 	}
 
@@ -170,6 +172,8 @@ function updateLineCounts() {
 			}
 		}
 
+		// TODO: also use priority of user, if available
+
 		let yes_string = yes,
 			no_string = no,
 			maybe_string = maybe;
@@ -235,6 +239,8 @@ function getCount(tr) {
 		maybe = parseInt(tr.dataset.maybe, 10),
 		id = tr.dataset.id;
 
+	// TODO: also use priority of user, if available
+
 	if( tr.querySelector('select') ) {
 		const val = parseInt(tr.querySelector('select').value, 10);
 		if( val === 0 ) {
@@ -278,6 +284,70 @@ function recheckPriorityConditions(){
 }
 
 
+function updatePriorityState() {
+
+	const prioritySelect = document.getElementById('priority-select');
+	if( ! prioritySelect ) return;
+
+	const priority = parseInt(prioritySelect.value, 10);
+
+	let passCheck = false;
+
+	const dateSelects = document.querySelectorAll('select[name^="entry_"]');
+
+	if( priority === 1 ) { // optional
+		
+		// NOTE: allow all combinations
+		passCheck = true;
+
+	} else if( priority === 2 ) { // prefer to attend
+
+		// NOTE: we want to have 'yes' or 'maybe' for at least half (rounded up) of the dates
+
+		let yes_maybe_count = 0;
+
+		for( const select of dateSelects ) {
+			const selectValue = parseInt(select.value, 10);
+
+			if( selectValue === 1 || selectValue === 2 ) {
+				yes_maybe_count++;
+			}
+		}
+
+		if( yes_maybe_count >= Math.ceil(dateSelects.length/2) ) {
+			passCheck = true;
+		}
+
+	} else if( priority === 3 ) { // really want to attend
+
+		// NOTE: we want to have 'yes' for at least half (rounded up) of the dates
+
+		let yes_count = 0;
+
+		for( const select of dateSelects ) {
+			const selectValue = parseInt(select.value, 10);
+
+			if( selectValue === 1 ) {
+				yes_count++;
+			}
+		}
+
+		if( yes_count >= Math.ceil(dateSelects.length/2) ) {
+			passCheck = true;
+		}
+
+	}
+
+	if( ! passCheck ) {
+		document.getElementById('priority-select-wrapper').classList.add('priority-select-wrapper--nopass');
+		document.getElementById('submit-button').disabled = true; // force submit button to disabled
+	} else {
+		document.getElementById('priority-select-wrapper').classList.remove('priority-select-wrapper--nopass');
+	}
+
+}
+
+
 function handleSubmitButton() {
 
 	const submitButton = document.getElementById('submit-button');
@@ -294,8 +364,6 @@ function handleSubmitButton() {
 		
 		if( ! select.value ) readyToSend = false;
 	}
-
-	// TODO: check if priority prerequisites are met
 
 	submitButton.disabled = ! readyToSend;
 

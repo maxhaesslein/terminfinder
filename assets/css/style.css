@@ -134,3 +134,7 @@ table tr.event-winner-3 td {
 		margin-top: 0.4em;
 		font-size: 0.8em;
 	}
+
+	.priority-select-wrapper--nopass .priority-select-description {
+		color: red;
+	}

@@ -189,7 +189,7 @@ if( $priority_select_enabled ) {
 	$selected = $user_data['priority'] ?? DEFAULT_PRIORITY;
 
 	?>
-	<p>
+	<p id="priority-select-wrapper">
 		<label>
 			<?= __('Priority') ?>: <select id="priority-select" name="priority"required>
 				<option value="3"<?php if( $selected === 3 ) echo ' selected'; ?>><?= __('Really want to attend') ?></option>

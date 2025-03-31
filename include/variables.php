@@ -99,6 +99,8 @@ foreach( $schedule as $id => $ev ) {
 
 	if( $yes + $maybe > $max_yes_maybe ) $max_yes_maybe = $yes + $maybe;
 
+	// TODO: also use priority of user, if available and activated
+
 	$best_matches[] = [
 		'points' => $yes*3 + $maybe*2 - $no,
 		'id' => $id
