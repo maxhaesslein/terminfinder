@@ -13,10 +13,10 @@ if( ! defined('TERMINFINDER') ) exit;
 
 	<title>Terminfinder</title>
 
-	<meta name="version" content="<?= $version ?>">
+	<meta name="version" content="<?= VERSION ?>">
 
-	<link rel="stylesheet" href="assets/css/style.css?v=<?= $version ?>" type="text/css" media="all">
+	<link rel="stylesheet" href="assets/css/style.css?v=<?= VERSION ?>" type="text/css" media="all">
 
-	<script type="text/javascript" src="assets/js/main.js?v=<?= $version ?>"></script>
+	<script type="text/javascript" src="assets/js/main.js?v=<?= VERSION ?>"></script>
 
 </head>

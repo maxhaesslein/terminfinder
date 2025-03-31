@@ -5,7 +5,17 @@ if( ! defined('TERMINFINDER') ) exit;
 $version = '1.1.0-dev';
 
 
+
+$debug = false;
+if( isset($_SERVER['LOCAL_DEV']) ) {
+	$debug = true;
+}
+
+if( $debug ) $version .= '.'.time(); // cache buster for dev
+
+
 define( 'DEFAULT_PRIORITY', 2 );
+define( 'VERSION', $version );
 
 
 $lang = $options['language'] ?? 'en';
@@ -141,12 +151,3 @@ if( ! empty($_REQUEST['user']) ) {
 
 	}
 }
-
-
-
-$debug = false;
-if( isset($_SERVER['LOCAL_DEV']) ) {
-	$debug = true;
-}
-
-if( $debug ) $version .= '.'.time(); // cache buster for dev
