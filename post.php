@@ -19,9 +19,12 @@ $action = $_POST['action'] ?? false;
 
 $name = $_POST['name'] ?? '';
 $name = trim($name);
-if( empty(trim($name)) ) {
+if( empty($name) ) {
 	url_redirect($redirect.'&error=name');
 }
+
+$priority = $_POST['priority'] ?? '';
+$priority = (int) trim($priority);
 
 
 if( $action === 'new' ) {
@@ -79,6 +82,7 @@ if( $action === 'new' ) {
 		'people' => [
 			[
 				'name' => $name,
+				'priority' => 3,
 				'events' => $person_events
 			]
 		]
@@ -95,6 +99,10 @@ if( $action === 'new' ) {
 
 } else {
 	// submission
+
+	if( $priority < 1 || $priority > 3 ) {
+		url_redirect($redirect.'&error=priority');
+	}
 
 	$new_events = [];
 	foreach( $_POST as $key => $value ) {
@@ -113,6 +121,7 @@ if( $action === 'new' ) {
 
 	$people[] = [
 		'name' => $name,
+		'priority' => $priority,
 		'events' => $new_events
 	];
 
