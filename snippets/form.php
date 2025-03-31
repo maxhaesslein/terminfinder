@@ -218,7 +218,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 			<?php
 		}
 		?>
-		<p><button><?= __('Save') ?></button></p>
+		<p><button id="submit-button"><?= __('Save') ?></button></p>
 
 		<?php
 	} else {

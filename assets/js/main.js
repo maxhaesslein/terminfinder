@@ -9,6 +9,11 @@
 		for( const input of document.querySelectorAll('input') ) {
 			input.addEventListener('change', function(){
 				isModified = true;
+				handleSubmitButton();
+			});
+			input.addEventListener('input', function(){
+				isModified = true;
+				handleSubmitButton();
 			});
 		}
 
@@ -17,6 +22,7 @@
 			select.addEventListener('change', function(){
 				isModified = true;
 				updateLineCounts();
+				handleSubmitButton();
 			});
 		}
 
@@ -33,6 +39,7 @@
 		handleDragDrop();
 		handleSorting();
 		handlePersonHiding();
+		handleSubmitButton();
 
 	}	
 	document.addEventListener( 'DOMContentLoaded', init, false );
@@ -318,6 +325,28 @@
 				person.classList.toggle('hidden');
 			}
 		});
+
+	}
+
+
+	function handleSubmitButton() {
+
+		const submitButton = document.getElementById('submit-button');
+		if( ! submitButton ) return;
+
+		let readyToSend = true;
+
+		for( const input of document.querySelectorAll('input') ) {
+			if( ! input.value ) readyToSend = false;
+		}
+
+		for( const select of document.querySelectorAll('select') ) {
+			if( select.id === 'sort-order' ) continue;
+			
+			if( ! select.value ) readyToSend = false;
+		}
+
+		submitButton.disabled = ! readyToSend;
 
 	}
 
