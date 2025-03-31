@@ -3,9 +3,19 @@ function initParticipationForm(){
 
 	updateLineCounts();
 
+	for( const input of document.querySelectorAll('input') ) {
+		input.addEventListener('change', function(){
+			handleSubmitButton();
+		});
+		input.addEventListener('input', function(){
+			handleSubmitButton();
+		});
+	}
+
 	for( const select of document.querySelectorAll('select') ) {
 		if( select.id === 'sort-order' ) continue;
 		select.addEventListener('change', function(){
+			handleSubmitButton();
 			updateLineCounts();
 		});
 	}
@@ -13,6 +23,7 @@ function initParticipationForm(){
 	handleSorting();
 	handlePersonHiding();
 	handlePrioritySwitching();
+	handleSubmitButton();
 
 }
 document.addEventListener( 'DOMContentLoaded', initParticipationForm, false );
@@ -263,5 +274,29 @@ function recheckPriorityConditions(){
 	if( ! newPriorityDescription ) return;
 
 	newPriorityDescription.classList.add('priority-select-description--visible');
+
+}
+
+
+function handleSubmitButton() {
+
+	const submitButton = document.getElementById('submit-button');
+	if( ! submitButton ) return;
+
+	let readyToSend = true;
+
+	for( const input of document.querySelectorAll('input') ) {
+		if( ! input.value ) readyToSend = false;
+	}
+
+	for( const select of document.querySelectorAll('select') ) {
+		if( select.id === 'sort-order' ) continue;
+		
+		if( ! select.value ) readyToSend = false;
+	}
+
+	// TODO: check if priority prerequisites are met
+
+	submitButton.disabled = ! readyToSend;
 
 }

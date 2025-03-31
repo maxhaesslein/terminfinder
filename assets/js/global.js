@@ -5,11 +5,9 @@ function init(){
 	for( const input of document.querySelectorAll('input') ) {
 		input.addEventListener('change', function(){
 			isModified = true;
-			handleSubmitButton();
 		});
 		input.addEventListener('input', function(){
 			isModified = true;
-			handleSubmitButton();
 		});
 	}
 
@@ -17,7 +15,6 @@ function init(){
 		if( select.id === 'sort-order' ) continue;
 		select.addEventListener('change', function(){
 			isModified = true;
-			handleSubmitButton();
 		});
 	}
 
@@ -26,34 +23,9 @@ function init(){
 		isModified = false;
 	});
 
-	handleSubmitButton();
-
 }	
 document.addEventListener( 'DOMContentLoaded', init, false );
 
-
-function handleSubmitButton() {
-
-	const submitButton = document.getElementById('submit-button');
-	if( ! submitButton ) return;
-
-	let readyToSend = true;
-
-	for( const input of document.querySelectorAll('input') ) {
-		if( ! input.value ) readyToSend = false;
-	}
-
-	for( const select of document.querySelectorAll('select') ) {
-		if( select.id === 'sort-order' ) continue;
-		
-		if( ! select.value ) readyToSend = false;
-	}
-
-	// TODO: check if priority prerequisites are met
-
-	submitButton.disabled = ! readyToSend;
-
-}
 
 
 window.addEventListener('beforeunload', function(event){
