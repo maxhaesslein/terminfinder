@@ -5,6 +5,9 @@ if( ! defined('TERMINFINDER') ) exit;
 $version = '1.1.0-dev';
 
 
+define( 'DEFAULT_PRIORITY', 2 );
+
+
 $lang = $options['language'] ?? 'en';
 
 $event = $_REQUEST['event'] ?? false;
@@ -44,7 +47,14 @@ $schedule = $data['schedule'] ?? [];
 $people = $data['people'] ?? [];
 
 
-foreach( $people as $person ) {
+for( $i = 0; $i < count($people); $i++ ) {
+
+	if( ! isset($people[$i]['priority']) ) {
+		$people[$i]['priority'] = DEFAULT_PRIORITY;
+	}
+
+	$person = $people[$i];
+
 	$events = $person['events'] ?? [];
 
 	foreach( $events as $id => $option ) {
