@@ -13,7 +13,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 	<?php
 
 	if( ! empty($_REQUEST['error']) ) {
-		echo '<p style="color: red;"><strong>'.__('Error').'</strong> '.__('while saving').' :( -- '.$_REQUEST['error'].'</p>';
+		echo '<p style="color: red;"><strong>'.__('Error').'</strong> '.__('while saving').' ('.$_REQUEST['error'].')</p>';
 	} elseif( isset($_REQUEST['success']) ) {
 		echo '<p style="color: green;"><strong>'.__('Successfully saved').'</strong></p>';
 		
