@@ -151,7 +151,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 					<select name="entry_<?= $id ?>" required>
 						<option value=""<?= $selected_none ?>>--</option>
 						<option value="1"<?= $selected_yes ?>><?= __('Yes') ?></option>
-						<option value="2"<?= $selected_maybe ?>><?= ('If need be') ?></option>
+						<option value="2"<?= $selected_maybe ?>><?= __('If need be') ?></option>
 						<option value="0"<?= $selected_no ?>><?= __('No') ?></option>
 					</select>
 				</td>
