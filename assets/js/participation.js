@@ -136,7 +136,7 @@ function updateLineCounts() {
 		if( yes+maybe > max_yes_maybe ) max_yes_maybe = yes+maybe;
 		
 		best_matches.push({
-			'points': yes*6 + maybe*3 - no,
+			'points': weightedPoints(yes, maybe, no),
 			'id': id
 		});
 
@@ -265,6 +265,12 @@ function getCount(tr) {
 		}
 	}
 
+	return weightedPoints(yes, maybe, no);
+}
+
+
+function weightedPoints( yes, maybe, no ) {
+	// NOTE: this function also exists in include/helper.php
 	return yes*6+maybe*3-no;
 }
 
