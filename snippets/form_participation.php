@@ -223,9 +223,9 @@ if( $priority_select_enabled ) {
 	<p id="priority-select-wrapper">
 		<label>
 			<?= __('Priority') ?>: <select id="priority-select" name="priority" required>
-				<option value="3"<?php if( $selected === 3 ) echo ' selected'; ?>><?= __('Really want to attend') ?></option>
-				<option value="2"<?php if( $selected === 2 ) echo ' selected'; ?>><?= __('Prefer to attend') ?></option>
-				<option value="1"<?php if( $selected === 1 ) echo ' selected'; ?>><?= __('Optional') ?></option>
+				<option value="3"<?php if( $selected === 3 ) echo ' selected'; ?>><?= __('I really want to attend') ?></option>
+				<option value="2"<?php if( $selected === 2 ) echo ' selected'; ?>><?= __('I prefer to attend') ?></option>
+				<option value="1"<?php if( $selected === 1 ) echo ' selected'; ?>><?= __('I don\'t need to attend') ?></option>
 			</select>
 		</label>
 		<span id="priority-select-description-3" class="priority-select-description">(<?= __('set yes for at least half of the dates, or lower the priority') ?>)</span>
