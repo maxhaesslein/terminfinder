@@ -13,7 +13,7 @@ if( ! defined('TERMINFINDER') ) exit;
 	<?= __('Session Details') ?> (<?= __('optional') ?>): <input type="text" name="event_description">
 </label></p>
 <p><label>
-	<?= __('Name') ?>: <input type="text" name="name" required>
+	<?= __('Your Name') ?>: <input type="text" name="name" required>
 </label></p>
 
 <strong><?= __('Dates') ?>:</strong>

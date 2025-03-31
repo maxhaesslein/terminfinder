@@ -201,14 +201,14 @@ foreach( $schedule as $id => $event ) {
 <?php
 if( $user_data && ! empty($user_data['name']) ) {
 	?>
-	<p><?= __('Name') ?>: <strong><?= $user_data['name'] ?></strong></p>
+	<p><?= __('Your Name') ?>: <strong><?= $user_data['name'] ?></strong></p>
 	<input type="hidden" name="name" value="<?= $user_data['name'] ?>">
 	<input type="hidden" name="user" value="<?= $_REQUEST['user'] ?>">
 	<?php
 } else {
 	?>
 	<p><label>
-		<?= __('Name') ?>: <input type="text" name="name" placeholder="<?= __('Name') ?>" value="" required>
+		<?= __('Your Name') ?>: <input type="text" name="name" placeholder="<?= __('Name') ?>" value="" required>
 	</label></p>
 	<?php
 }
