@@ -18,3 +18,15 @@ return [
 ];
 
 ```
+
+## Changelog
+
+### v.1.1.0
+
+- added optional 'Priority' dropdown
+- small bugfixes and enhancements
+
+### v.1.0.0
+
+- first release
+
