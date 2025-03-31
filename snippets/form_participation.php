@@ -93,6 +93,10 @@ foreach( $schedule as $id => $event ) {
 	$selected_maybe = '';
 	$selected_no = '';
 
+	$data_yes_value = $event['yes_value'] ?? 0;
+	$data_maybe_value = $event['maybe_value'] ?? 0;
+	$data_no_value = $event['no_value'] ?? 0;
+
 	if( $user_data && ! empty($user_data['events']) ) {
 		$selected_value = $user_data['events'][$id] ?? false;
 
@@ -100,19 +104,22 @@ foreach( $schedule as $id => $event ) {
 			$selected_none = '';
 			$selected_no = ' selected';
 			$data_no--;
+			$data_no_value -= $user_data['priority'];
 		} elseif( $selected_value === 1 ) {
 			$selected_none = '';
 			$selected_yes = ' selected';
 			$data_yes--;
+			$data_yes_value -= $user_data['priority'];
 		} elseif( $selected_value === 2 ) {
 			$selected_none = '';
 			$selected_maybe = ' selected';
 			$data_maybe--;
+			$data_maybe_value -= $user_data['priority'];
 		}
 	}
 
 	?>
-	<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>" data-id="<?= $id ?>" data-sort="<?= $i ?>">
+	<tr class="<?= implode(' ', $class ) ?>" data-yes="<?= $data_yes ?>" data-no="<?= $data_no ?>" data-maybe="<?= $data_maybe ?>" data-yes_value="<?= $data_yes_value ?>" data-no_value="<?= $data_no_value ?>" data-maybe_value="<?= $data_maybe_value ?>" data-id="<?= $id ?>" data-sort="<?= $i ?>">
 		<td class="event-title" title="<?= $id ?>">
 			<?= $name ?>
 		</td>

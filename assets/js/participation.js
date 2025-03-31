@@ -96,6 +96,13 @@ function updateLineCounts() {
 
 	if( ! table ) return;
 
+	let priority = 1;
+	const prioritySelect = document.getElementById('priority-select');
+	if( prioritySelect ) {
+		priority = parseInt(prioritySelect.value, 10);
+		if( priority < 1 ) priority = 1;
+	}
+
 	const trs = table.querySelectorAll('tr.event-line');
 
 	let people_count = parseInt(table.dataset.peopleCount, 10);
@@ -105,21 +112,22 @@ function updateLineCounts() {
 		max_yes_maybe = 0,
 		best_matches = [];
 
+	// determine points/winners for each line
 	for( const tr of trs ) {
 
-		let yes = parseInt(tr.dataset.yes, 10),
-			no = parseInt(tr.dataset.no, 10),
-			maybe = parseInt(tr.dataset.maybe, 10),
+		let yes = parseInt(tr.dataset.yes_value, 10),
+			no = parseInt(tr.dataset.no_value, 10),
+			maybe = parseInt(tr.dataset.maybe_value, 10),
 			id = tr.dataset.id;
 
 		if( tr.querySelector('select') ) {
 			const val = parseInt(tr.querySelector('select').value, 10);
 			if( val === 0 ) {
-				no++;
+				no += priority
 			} else if( val === 1 ) {
-				yes++;
+				yes += priority;
 			} else if( val === 2 ) {
-				maybe++;
+				maybe += priority;
 			}
 		}
 
@@ -128,7 +136,7 @@ function updateLineCounts() {
 		if( yes+maybe > max_yes_maybe ) max_yes_maybe = yes+maybe;
 		
 		best_matches.push({
-			'points': yes*3 + maybe*2 - no,
+			'points': yes*6 + maybe*3 - no,
 			'id': id
 		});
 
@@ -156,6 +164,7 @@ function updateLineCounts() {
 	}
 
 
+	// update view count for each line
 	for( const tr of trs ) {
 		let yes = parseInt(tr.dataset.yes, 10),
 			no = parseInt(tr.dataset.no, 10),
@@ -172,8 +181,6 @@ function updateLineCounts() {
 				maybe++;
 			}
 		}
-
-		// TODO: also use priority of user, if available
 
 		let yes_string = yes,
 			no_string = no,
@@ -235,25 +242,30 @@ function handlePersonHiding(){
 
 
 function getCount(tr) {
-	let yes = parseInt(tr.dataset.yes, 10),
-		no = parseInt(tr.dataset.no, 10),
-		maybe = parseInt(tr.dataset.maybe, 10),
+	let yes = parseInt(tr.dataset.yes_value, 10),
+		no = parseInt(tr.dataset.no_value, 10),
+		maybe = parseInt(tr.dataset.maybe_value, 10),
 		id = tr.dataset.id;
 
-	// TODO: also use priority of user, if available
+	let priority = 1;
+	const prioritySelect = document.getElementById('priority-select');
+	if( prioritySelect ) {
+		priority = parseInt(prioritySelect.value, 10);
+		if( priority < 1 ) priority = 1;
+	}
 
 	if( tr.querySelector('select') ) {
 		const val = parseInt(tr.querySelector('select').value, 10);
 		if( val === 0 ) {
-			no++;
+			no += priority;
 		} else if( val === 1 ) {
-			yes++;
+			yes += priority;
 		} else if( val === 2 ) {
-			maybe++;
+			maybe += priority;
 		}
 	}
 
-	return yes*3+maybe*2-no;
+	return yes*6+maybe*3-no;
 }
 
 
@@ -265,6 +277,8 @@ function handlePrioritySwitching(){
 	prioritySelect.addEventListener('change', recheckPriorityConditions);
 
 	recheckPriorityConditions();
+
+	updateLineCounts();
 
 }
 

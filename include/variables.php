@@ -118,7 +118,7 @@ foreach( $schedule as $id => $ev ) {
 	if( $yes + $maybe > $max_yes_maybe ) $max_yes_maybe = $yes + $maybe;
 
 	$best_matches[] = [
-		'points' => $yes*6 + $maybe*3 - $no, // TODO: update in js
+		'points' => $yes*6 + $maybe*3 - $no,
 		'id' => $id
 	];
 
