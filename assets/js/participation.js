@@ -163,16 +163,6 @@ function updateLineCounts() {
 
 	}
 
-	if( ! winners[3] ) {
-		// only show winners, if we have at least 3 steps to show
-
-		for( const tr of trs ) {
-			tr.classList.remove('event-winner-1', 'event-winner-2', 'event-winner-3');
-		}
-
-		return;
-	}
-
 	// update view count for each line
 	for( const tr of trs ) {
 		let yes = parseInt(tr.dataset.yes, 10),
@@ -204,12 +194,17 @@ function updateLineCounts() {
 
 		tr.classList.remove('event-winner-1', 'event-winner-2', 'event-winner-3');
 		
-		if( winners[1] && winners[1].includes(id) ) {
-			tr.classList.add('event-winner-1');
-		} else if( winners[2] && winners[2].includes(id) ) {
-			tr.classList.add('event-winner-2');
-		} else if( winners[3] && winners[3].includes(id) ) {
-			tr.classList.add('event-winner-3');
+		if( winners[3] ) {
+			// only show winners, if we have at least 3 steps to show
+
+			if( winners[1] && winners[1].includes(id) ) {
+				tr.classList.add('event-winner-1');
+			} else if( winners[2] && winners[2].includes(id) ) {
+				tr.classList.add('event-winner-2');
+			} else if( winners[3] && winners[3].includes(id) ) {
+				tr.classList.add('event-winner-3');
+			}
+
 		}
 
 		tr.querySelector('td.yes').innerHTML = yes_string;
