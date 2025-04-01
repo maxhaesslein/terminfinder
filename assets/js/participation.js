@@ -313,6 +313,7 @@ function updatePriorityState() {
 	const priority = parseInt(prioritySelect.value, 10);
 
 	let passCheck = false;
+	let missing = 0;
 
 	const dateSelects = document.querySelectorAll('select[name^="entry_"]');
 
@@ -335,8 +336,12 @@ function updatePriorityState() {
 			}
 		}
 
-		if( yes_maybe_count >= Math.ceil(dateSelects.length * 1/3) ) {
+		const targetCount = Math.ceil(dateSelects.length * 1/3);
+
+		if( yes_maybe_count >= targetCount ) {
 			passCheck = true;
+		} else {
+			missing = targetCount - yes_maybe_count;
 		}
 
 	} else if( priority === 3 ) { // really want to attend
@@ -353,8 +358,12 @@ function updatePriorityState() {
 			}
 		}
 
-		if( yes_count >= Math.ceil(dateSelects.length/2) ) {
+		const targetCount = Math.ceil(dateSelects.length * 1/2);
+
+		if( yes_count >= targetCount ) {
 			passCheck = true;
+		} else {
+			missing = targetCount - yes_count;
 		}
 
 	}
@@ -364,6 +373,14 @@ function updatePriorityState() {
 		document.getElementById('submit-button').disabled = true; // force submit button to disabled
 	} else {
 		document.getElementById('priority-select-wrapper').classList.remove('priority-select-wrapper--nopass');
+	}
+
+	if( missing > 0 ) {
+		document.getElementById('priority-select-missing-count').innerText = missing;
+		document.getElementById('priority-select-missing').classList.add('priority-select-missing--visible');
+	} else {
+		document.getElementById('priority-select-missing-count').innerText = '';
+		document.getElementById('priority-select-missing').classList.remove('priority-select-missing--visible');
 	}
 
 }

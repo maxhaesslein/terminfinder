@@ -182,6 +182,16 @@ table tr.event-winner-3 td {
 		font-size: 0.8em;
 	}
 
-	.priority-select-wrapper--nopass .priority-select-description {
+	.priority-select-missing {
+		font-size: 0.8em;
+		display: none;
+	}
+	
+		.priority-select-missing--visible {
+			display: block;
+		}
+
+	.priority-select-wrapper--nopass .priority-select-description,
+	.priority-select-wrapper--nopass .priority-select-missing {
 		color: var(--color-error);
 	}

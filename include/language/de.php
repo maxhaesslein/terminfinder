@@ -36,4 +36,5 @@ $texts = [
 	'set yes for at least half of the dates, or lower the priority' => 'Stimme bei mindestens der Hälfte der Termine mit Ja, oder setze die Priorität herab',
 	'set yes or maybe for at least one third of the dates, or lower the priority' => 'Stimme bei mindestens einem Drittel der Termine mit Ja oder Vielleicht, oder setze die Priorität herab',
 	'no restrictions' => 'Keine Einschränkungen',
+	'%s missing' => 'noch %s',
 ];

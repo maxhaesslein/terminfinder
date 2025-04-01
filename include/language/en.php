@@ -36,4 +36,5 @@ $texts = [
 	'set yes for at least half of the dates, or lower the priority' => 'set yes for at least half of the dates, or lower the priority',
 	'set yes or maybe for at least one third of the dates, or lower the priority' => 'set yes or maybe for at least one third of the dates, or lower the priority',
 	'no restrictions' => 'no restrictions',
+	'%s missing' => '%s missing',
 ];
