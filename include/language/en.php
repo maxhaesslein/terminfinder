@@ -37,4 +37,5 @@ $texts = [
 	'set yes or maybe for at least one third of the dates, or lower the priority' => 'set yes or maybe for at least one third of the dates, or lower the priority',
 	'no restrictions' => 'no restrictions',
 	'%s missing' => '%s missing',
+	'If activated, the user can select between different priority options, like "I really want to attend" or "I don\'t need to attend".' => 'If activated, the user can select between different priority options, like "I really want to attend" or "I don\'t need to attend".',
 ];

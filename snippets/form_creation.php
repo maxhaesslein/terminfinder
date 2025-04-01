@@ -88,8 +88,11 @@ if( $preset_slot_selections ) {
 	</tfoot>
 </table>
 
-<p><label>
-	<input type="checkbox" name="priority-select-enabled" value="1"<?php if($preset_priority_select_enabled) echo ' checked'; ?>><?= __('Allow Priority Select') ?>
-</label></p>
+<p>
+	<label>
+		<input type="checkbox" name="priority-select-enabled" value="1"<?php if($preset_priority_select_enabled) echo ' checked'; ?>><?= __('Allow Priority Select') ?>
+	</label>
+	<br><small><?= __('If activated, the user can select between different priority options, like "I really want to attend" or "I don\'t need to attend".') ?></small>
+</p>
 
 <p><button><?= __('Create Session') ?></button></p>

@@ -37,4 +37,5 @@ $texts = [
 	'set yes or maybe for at least one third of the dates, or lower the priority' => 'Stimme bei mindestens einem Drittel der Termine mit Ja oder Vielleicht, oder setze die Priorität herab',
 	'no restrictions' => 'Keine Einschränkungen',
 	'%s missing' => 'noch %s',
+	'If activated, the user can select between different priority options, like "I really want to attend" or "I don\'t need to attend".' => 'Wenn aktiviert kann der Teilnehmende kann zwischen verschiedenen Prioritäten wählen, wie z.B. "Ich möchte auf jeden Fall teilnehmen" oder "Ich muss nicht unbedingt teilnehmen".',
 ];
