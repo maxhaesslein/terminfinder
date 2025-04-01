@@ -3,9 +3,25 @@
 if( ! defined('TERMINFINDER') ) exit;
 
 
-function url_redirect( $url = false ) {
+function url_redirect( array ...$arguments ) {
 
-	if( ! $url ) $url = 'index.php';
+	$url = 'index.php';
+
+	if( count($arguments) ) {
+		
+		$append = [];
+
+		$arguments = array_merge(...$arguments);
+
+		foreach( $arguments as $key => $value ) {
+			$append[] = urlencode($key).'='.urlencode($value);
+		}
+
+		if( count($append) ) {
+			$url .= "?".implode('&', $append);
+		}
+
+	}
 
 	header("Location: ".$url);
 

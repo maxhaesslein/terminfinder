@@ -5,12 +5,12 @@ if( ! defined('TERMINFINDER') ) exit;
 
 $title = $_POST['event_title'] ?? false;
 if( ! $title ) {
-	url_redirect($redirect.'&error=title');
+	url_redirect( $redirect_args, ['error' => 'title'] );
 }
 
 $id = sanitize_title($title);
 if( ! $id ) {
-	url_redirect($redirect.'&error=id');
+	url_redirect( $redirect_args, ['error' => 'id'] );
 }
 
 $description = $_POST['event_description'] ?? '';
@@ -26,13 +26,13 @@ $slot_names = $_POST['event_slot_name'] ?? [];
 $slot_selections = $_POST['event_slot_selection'] ?? [];
 
 if( ! is_array($slot_names) || ! count($slot_names) ) {
-	url_redirect($redirect.'&error=event-names');
+	url_redirect($redirect_args, ['error' => 'event-names'] );
 }
 if( ! is_array($slot_selections) || ! count($slot_selections) ) {
-	url_redirect($redirect.'&error=event-selections');
+	url_redirect($redirect_args, ['error' => 'event-selections'] );
 }
 if( count($slot_names) != count($slot_selections) ) {
-	url_redirect($redirect.'&error=event-count');
+	url_redirect($redirect_args, ['error' => 'event-count']);
 }
 
 $schedule = [];
@@ -71,9 +71,9 @@ $data = [
 
 
 if( ! file_put_contents("data/".$event.".json", json_encode($data)) ) {
-	url_redirect($redirect.'&error=save');
+	url_redirect( $redirect_args, ['error' => 'save'] );
 }
 
-$redirect .= '&user='.get_hash($name);
+$redirect_args['user'] = get_hash($name);
 
-url_redirect($redirect.'&success');
+url_redirect( $redirect_args, ['success' => true] );

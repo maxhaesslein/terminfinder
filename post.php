@@ -12,10 +12,10 @@ if( ! $event ) {
 	url_redirect();
 }
 
-$redirect = 'index.php?event='.$event;
+$redirect_args = ['event' => $event];
 
 if( $user_hash ) {
-	$redirect .= '&user='.$user_hash;
+	$redirect_args['user'] = $user_hash;
 }
 
 
@@ -24,7 +24,7 @@ $action = $_POST['action'] ?? false;
 $name = $_POST['name'] ?? '';
 $name = trim($name);
 if( empty($name) ) {
-	url_redirect($redirect.'&error=name');
+	url_redirect( $redirect_args, ['error' => 'name'] );
 }
 
 if( $action === 'new' ) {

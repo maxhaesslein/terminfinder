@@ -15,7 +15,7 @@ foreach( $_POST as $key => $value ) {
 }
 
 if( ! count($new_events) ) {
-	url_redirect($redirect.'&error=events');
+	url_redirect( $redirect_args, ['error' => 'events'] );
 }
 
 
@@ -40,7 +40,7 @@ if( $priority_select_enabled ) {
 		}
 
 		if( $yes_maybe_count < ceil(count($new_events)) * 1/3 ) {
-			url_redirect($redirect.'&error=priority-to-low');
+			url_redirect( $redirect_args, ['error' => 'priority-too-low'] );
 		}
 
 	} elseif( $priority === 3 ) { // really want to attend
@@ -54,11 +54,11 @@ if( $priority_select_enabled ) {
 		}
 
 		if( $yes_count < ceil(count($new_events)) * 1/3 ) {
-			url_redirect($redirect.'&error=priority-to-low');
+			url_redirect( $redirect_args, ['error' => 'priority-too-low'] );
 		}
 
 	} else { // unknown value
-		url_redirect($redirect.'&error=priority');
+		url_redirect( $redirect_args, ['error' => 'priority'] );
 	}
 
 
@@ -75,9 +75,9 @@ $data['people'] = $people;
 
 
 if( ! file_put_contents("data/".$event.".json", json_encode($data)) ) {
-	url_redirect($redirect.'&error=save');
+	url_redirect( $redirect_args, ['error' => 'save'] );
 }
 
-$redirect .= '&user='.get_hash( $name );
+$redirect_args['user'] = get_hash( $name );
 
-url_redirect($redirect.'&success');
+url_redirect( $redirect_args, ['success' => true] );
