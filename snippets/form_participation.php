@@ -76,12 +76,14 @@ foreach( $schedule as $id => $event ) {
 
 	$class = [ 'event-line' ];
 
-	if( count($winners) && in_array($id, $winners[1]) ) {
-		$class[] = 'event-winner-1';
-	} elseif( count($winners) > 1 && in_array($id, $winners[2]) ) {
-		$class[] = 'event-winner-2';
-	} elseif( count($winners) > 2 && in_array($id, $winners[3]) ) {
-		$class[] = 'event-winner-3';
+	if( count($winners) > 2 ) { // only show winners, if we have at least 3 steps to show
+		if( count($winners) && in_array($id, $winners[1]) ) {
+			$class[] = 'event-winner-1';
+		} elseif( count($winners) > 1 && in_array($id, $winners[2]) ) {
+			$class[] = 'event-winner-2';
+		} elseif( count($winners) > 2 && in_array($id, $winners[3]) ) {
+			$class[] = 'event-winner-3';
+		}
 	}
 
 	$data_yes = $yes;

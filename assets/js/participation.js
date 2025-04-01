@@ -163,6 +163,15 @@ function updateLineCounts() {
 
 	}
 
+	if( ! winners[3] ) {
+		// only show winners, if we have at least 3 steps to show
+
+		for( const tr of trs ) {
+			tr.classList.remove('event-winner-1', 'event-winner-2', 'event-winner-3');
+		}
+
+		return;
+	}
 
 	// update view count for each line
 	for( const tr of trs ) {
