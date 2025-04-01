@@ -229,7 +229,7 @@ if( $priority_select_enabled ) {
 			</select>
 		</label>
 		<span id="priority-select-description-3" class="priority-select-description">(<?= __('set yes for at least half of the dates, or lower the priority') ?>)</span>
-		<span id="priority-select-description-2" class="priority-select-description">(<?= __('set yes or maybe for at least half of the dates, or lower the priority') ?>)</span>
+		<span id="priority-select-description-2" class="priority-select-description">(<?= __('set yes or maybe for at least one third of the dates, or lower the priority') ?>)</span>
 		<span id="priority-select-description-1" class="priority-select-description">(<?= __('no restrictions') ?>)</span>
 	</p>
 	<?php

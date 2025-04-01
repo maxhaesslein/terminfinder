@@ -323,7 +323,7 @@ function updatePriorityState() {
 
 	} else if( priority === 2 ) { // prefer to attend
 
-		// NOTE: we want to have 'yes' or 'maybe' for at least half (rounded up) of the dates
+		// NOTE: we want to have 'yes' or 'maybe' for at least one third (rounded up) of the dates
 
 		let yes_maybe_count = 0;
 
@@ -335,7 +335,7 @@ function updatePriorityState() {
 			}
 		}
 
-		if( yes_maybe_count >= Math.ceil(dateSelects.length/2) ) {
+		if( yes_maybe_count >= Math.ceil(dateSelects.length * 1/3) ) {
 			passCheck = true;
 		}
 

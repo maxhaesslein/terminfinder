@@ -34,6 +34,6 @@ $texts = [
 	'I don\'t need to attend' => 'I don\'t need to attend',
 	'Allow Priority Select' => 'Allow Priority Select',
 	'set yes for at least half of the dates, or lower the priority' => 'set yes for at least half of the dates, or lower the priority',
-	'set yes or maybe for at least half of the dates, or lower the priority' => 'set yes or maybe for at least half of the dates, or lower the priority',
+	'set yes or maybe for at least one third of the dates, or lower the priority' => 'set yes or maybe for at least one third of the dates, or lower the priority',
 	'no restrictions' => 'no restrictions',
 ];
