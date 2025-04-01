@@ -280,7 +280,7 @@ function getCount(tr) {
 
 function weightedPoints( yes, maybe, no ) {
 	// NOTE: this function also exists in include/helper.php
-	return yes*6+maybe*3-no;
+	return yes*4+maybe*2-no;
 }
 
 

@@ -44,5 +44,5 @@ function hash_verify( $string, $hash ) {
 
 function weightedPoints( $yes, $maybe, $no ) {
 	// NOTE: this function also exists in assets/js/participation.js
-	return $yes*6 + $maybe*3 - $no;
+	return $yes*4 + $maybe*2 - $no;
 }
