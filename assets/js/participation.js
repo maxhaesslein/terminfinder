@@ -350,7 +350,7 @@ function updatePriorityState() {
 
 	} else if( priority === 3 ) { // really want to attend
 
-		// NOTE: we want to have 'yes' for at least half (rounded up) of the dates
+		// NOTE: we want to have 'yes' for at least one third (rounded up) of the dates
 
 		let yes_count = 0;
 
@@ -362,7 +362,7 @@ function updatePriorityState() {
 			}
 		}
 
-		const targetCount = Math.ceil(dateSelects.length * 1/2);
+		const targetCount = Math.ceil(dateSelects.length * 1/3);
 
 		if( yes_count >= targetCount ) {
 			passCheck = true;

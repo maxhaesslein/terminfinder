@@ -230,7 +230,7 @@ if( $priority_select_enabled ) {
 				<option value="1"<?php if( $selected === 1 ) echo ' selected'; ?>><?= __('I don\'t need to attend') ?></option>
 			</select>
 		</label>
-		<span id="priority-select-description-3" class="priority-select-description"><?= __('set yes for at least half of the dates, or lower the priority') ?></span>
+		<span id="priority-select-description-3" class="priority-select-description"><?= __('set yes for at least one third of the dates, or lower the priority') ?></span>
 		<span id="priority-select-description-2" class="priority-select-description"><?= __('set yes or maybe for at least one third of the dates, or lower the priority') ?></span>
 		<span id="priority-select-description-1" class="priority-select-description"><?= __('no restrictions') ?></span>
 		<span id="priority-select-missing" class="priority-select-missing">(<?= sprintf(__('%s missing'), '<span id="priority-select-missing-count"></span>') ?>)</span>

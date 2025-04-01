@@ -45,7 +45,7 @@ if( $priority_select_enabled ) {
 
 	} elseif( $priority === 3 ) { // really want to attend
 
-		// NOTE: we want to have 'yes' for at least half (rounded up) of the dates
+		// NOTE: we want to have 'yes' for at least one third (rounded up) of the dates
 		$yes_count = 0;
 		foreach( $new_events as $new_event_option ) {
 			if( $new_event_option === 1 ) {
@@ -53,7 +53,7 @@ if( $priority_select_enabled ) {
 			}
 		}
 
-		if( $yes_count < ceil(count($new_events)) / 2 ) {
+		if( $yes_count < ceil(count($new_events)) * 1/3 ) {
 			url_redirect($redirect.'&error=priority-to-low');
 		}
 
