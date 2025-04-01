@@ -9,7 +9,7 @@ include_once('include/language.php');
 
 include_once('snippets/head.php');
 ?>
-<body id="offline">
+<body>
 
 <main>
 	<h1>Terminfinder</h1>
