@@ -18,7 +18,7 @@ if( $description ) echo '<p>'.$description.'</p>';
 		echo '<p class="form-message form-message--success"><strong>'.__('Successfully saved').'</strong></p>';
 	}
 	
-	if( isset($_REQUEST['user']) ) {
+	if( isset($_REQUEST['user']) && $user_data && ! empty($user_data['name']) ) {
 		$link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
 . "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]?event=$event&user=".$_REQUEST['user'];
 		echo '<p>'.__('Your link for re-editing this entry is').': <em><a href="'.$link.'">'.$link.'</a></em></p>';
