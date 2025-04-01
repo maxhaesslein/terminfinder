@@ -14,6 +14,7 @@ function url_redirect( array ...$arguments ) {
 		$arguments = array_merge(...$arguments);
 
 		foreach( $arguments as $key => $value ) {
+			if( is_array($value) ) $value = json_encode($value);
 			$append[] = urlencode($key).'='.urlencode($value);
 		}
 
