@@ -3,6 +3,9 @@
 if( ! defined('TERMINFINDER') ) exit;
 
 
+$redirect_args['name'] = $name;
+
+
 $new_events = [];
 foreach( $_POST as $key => $value ) {
 
@@ -19,12 +22,16 @@ if( ! count($new_events) ) {
 }
 
 
+$redirect_args['events'] = json_encode($new_events);
+
+
 $priority = DEFAULT_PRIORITY;
 if( $priority_select_enabled ) {
 
 	$priority = $_POST['priority'] ?? '';
 	$priority = (int) trim($priority);
 
+	$redirect_args['priority'] = $priority;
 
 	if( $priority === 1 ) { // optional
 		// NOTE: allow all combinations

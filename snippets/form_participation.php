@@ -5,6 +5,25 @@ if( ! defined('TERMINFINDER') ) exit;
 $data_people_count = $people_count;
 if( ! $user_data ) $data_people_count++;
 
+$preset_name = isset($_GET['name']) ? urldecode($_GET['name']) : '';
+$preset_priority = isset($_GET['priority']) ? (int) $_GET['priority'] : DEFAULT_PRIORITY;
+$preset_events = isset($_GET['events']) ? urldecode($_GET['events']) : '';
+
+if( $preset_events ) {
+	$preset_events = json_decode($preset_events, true) ?? [];
+	if( is_array($preset_events) && count($preset_events) ) {
+		$preset_events_clean = [];
+		foreach( $preset_events as $key => $value ) {
+			if( ! str_starts_with($key, 'ev-') ) continue;
+
+			$preset_events_clean[$key] = (int) $value;
+
+		}
+	} else {
+		$preset_events_clean = [];
+	}
+}
+
 ?>
 <p id="sort-wrapper" hidden><label>
 	<?= __('Sort by') ?>: <select id="sort-order" name="sort-order">
@@ -86,6 +105,18 @@ foreach( $schedule as $id => $event ) {
 		}
 	}
 
+
+	$selected_value = false;
+
+	if( $preset_events_clean && isset($preset_events_clean[$id]) ) {
+		$selected_value = $preset_events_clean[$id];
+	}
+
+	if( $user_data && ! empty($user_data['events']) ) {
+		$selected_value = $user_data['events'][$id] ?? false;
+	}
+	
+
 	$data_yes = $yes;
 	$data_no = $no;
 	$data_maybe = $maybe;
@@ -99,23 +130,25 @@ foreach( $schedule as $id => $event ) {
 	$data_maybe_value = $event['maybe_value'] ?? 0;
 	$data_no_value = $event['no_value'] ?? 0;
 
-	if( $user_data && ! empty($user_data['events']) ) {
-		$selected_value = $user_data['events'][$id] ?? false;
-
-		if( $selected_value === 0 ) {
-			$selected_none = '';
-			$selected_no = ' selected';
-			$data_no--;
+	if( $selected_value === 0 ) {
+		$selected_none = '';
+		$selected_no = ' selected';
+		$data_no--;
+		if( $user_data && isset($user_data['priority']) ) {
 			$data_no_value -= $user_data['priority'];
-		} elseif( $selected_value === 1 ) {
-			$selected_none = '';
-			$selected_yes = ' selected';
-			$data_yes--;
+		}
+	} elseif( $selected_value === 1 ) {
+		$selected_none = '';
+		$selected_yes = ' selected';
+		$data_yes--;
+		if( $user_data && isset($user_data['priority']) ) {
 			$data_yes_value -= $user_data['priority'];
-		} elseif( $selected_value === 2 ) {
-			$selected_none = '';
-			$selected_maybe = ' selected';
-			$data_maybe--;
+		}
+	} elseif( $selected_value === 2 ) {
+		$selected_none = '';
+		$selected_maybe = ' selected';
+		$data_maybe--;
+		if( $user_data && isset($user_data['priority']) ) {
 			$data_maybe_value -= $user_data['priority'];
 		}
 	}
@@ -210,7 +243,7 @@ if( $user_data && ! empty($user_data['name']) ) {
 } else {
 	?>
 	<p><label>
-		<?= __('Your Name') ?>: <input type="text" name="name" placeholder="<?= __('Name') ?>" value="" required>
+		<?= __('Your Name') ?>: <input type="text" name="name" placeholder="<?= __('Name') ?>" value="<?= $preset_name ?>" required>
 	</label></p>
 	<?php
 }
@@ -220,6 +253,10 @@ if( $user_data && ! empty($user_data['name']) ) {
 if( $priority_select_enabled ) {
 
 	$selected = $user_data['priority'] ?? DEFAULT_PRIORITY;
+
+	if( $preset_priority >= 1 && $preset_priority <= 3 ) {
+		$selected = $preset_priority;
+	}
 
 	?>
 	<p id="priority-select-wrapper">
