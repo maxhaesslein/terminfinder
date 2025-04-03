@@ -2,7 +2,7 @@
 
 if( ! defined('TERMINFINDER') ) exit;
 
-$version = '1.1.0-dev.3';
+$version = '1.1.0';
 
 
 
