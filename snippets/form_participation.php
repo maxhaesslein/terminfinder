@@ -9,6 +9,8 @@ $preset_name = isset($_GET['name']) ? urldecode($_GET['name']) : '';
 $preset_priority = isset($_GET['priority']) ? (int) $_GET['priority'] : DEFAULT_PRIORITY;
 $preset_events = isset($_GET['events']) ? urldecode($_GET['events']) : '';
 
+$preset_events_clean = false;
+
 if( $preset_events ) {
 	$preset_events = json_decode($preset_events, true) ?? [];
 	if( is_array($preset_events) && count($preset_events) ) {
