@@ -14,7 +14,7 @@ if( isset($_SERVER['LOCAL_DEV']) ) {
 if( $debug ) $version .= '.'.time(); // cache buster for dev
 
 
-define( 'DEFAULT_PRIORITY', 2 );
+define( 'DEFAULT_PRIORITY', 1 );
 define( 'VERSION', $version );
 
 

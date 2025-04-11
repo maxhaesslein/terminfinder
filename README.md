@@ -21,6 +21,10 @@ return [
 
 ## Changelog
 
+### v.1.x.x
+
+- changed default priority to "I don't need to attend"
+
 ### v.1.1.0
 
 - added optional 'Priority' dropdown
