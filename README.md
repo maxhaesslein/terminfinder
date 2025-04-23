@@ -23,10 +23,11 @@ return [
 
 ## Changelog
 
-### v.1.x.x
+### v.1.1.1
 
 - changed default priority to "I don't need to attend"
 - default priority can be set via config
+- debug mode can be enabled via config
 
 ### v.1.1.0
 
