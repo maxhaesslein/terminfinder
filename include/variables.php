@@ -14,7 +14,12 @@ if( isset($_SERVER['LOCAL_DEV']) ) {
 if( $debug ) $version .= '.'.time(); // cache buster for dev
 
 
-define( 'DEFAULT_PRIORITY', 1 );
+$default_priority = (int) $options['default_priority'];
+
+if( $default_priority < 1 ) $default_priority = 1;
+if( $default_priority > 3 ) $default_priority = 3;
+
+define( 'DEFAULT_PRIORITY', $default_priority );
 define( 'VERSION', $version );
 
 
