@@ -6,10 +6,7 @@ $version = '1.1.1-dev';
 
 
 
-$debug = false;
-if( isset($_SERVER['LOCAL_DEV']) ) {
-	$debug = true;
-}
+$debug = $options['debug'];
 
 if( $debug ) $version .= '.'.time(); // cache buster for dev
 

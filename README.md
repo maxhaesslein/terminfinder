@@ -16,6 +16,7 @@ If you want to edit config options, create the file `custom/config.php` with the
 return [
 	'language' => 'en', // can be 'en' or 'de'
 	'default_priority' => 1, // 1 = lowest, 2 = middle, 3 = highest
+	'debug' => false, // set to true to enable debug mode
 ];
 
 ```
