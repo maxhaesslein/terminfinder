@@ -15,6 +15,7 @@ If you want to edit config options, create the file `custom/config.php` with the
 
 return [
 	'language' => 'en', // can be 'en' or 'de'
+	'default_priority' => 1, // 1 = lowest, 2 = middle, 3 = highest
 ];
 
 ```
@@ -24,6 +25,7 @@ return [
 ### v.1.x.x
 
 - changed default priority to "I don't need to attend"
+- default priority can be set via config
 
 ### v.1.1.0
 
